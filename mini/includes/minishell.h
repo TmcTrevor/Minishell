@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/10 18:35:49 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/11 09:28:12 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,36 @@ typedef struct	s_env
 {
 	char			*value;
 	struct s_env	*next;
-}				t_env;
+}					t_env;
+
 typedef struct s_redirect
 {
-        char *line;
-        char *file;
+        char	*line;
+        char	*file;
        //char  **argument;
         int     type;
-        struct s_redirect *nextred;
+        struct	s_redirect *nextred;
 }               t_redirect;
 
 typedef struct  s_command
 {
-        char    *cmd;
-        char    *fcmd;
-		int		t[300];
-        int count;
-        char **argument;
-        t_redirect  *redirect;
-        struct s_command *nextcmd;
+        char    			*cmd;
+        char    			*fcmd;
+		int					t[300];
+        int 				count;
+        char 				**argument;
+        t_redirect  		*redirect;
+        struct s_command	*nextcmd;
         
 }               t_command;
 
 typedef struct	s_main
 {
-	char	*line;
-    t_env	*env;
-	t_env	*secret_env;
-    int		count;
-    int     t[300];
+	char			*line;
+    t_env			*env;
+	t_env			*secret_env;
+    int				count;
+    int				t[300];
     t_command       *cmd;
 
 }				t_main;
@@ -81,16 +82,16 @@ t_command	*delete_first(t_command *a);
 /*---------------------------------------------------------------------*/
 
 /*-------------------------- redirect list minupilation -----------------*/
-t_redirect	*new_stack_red(char *a);
+t_redirect	*new_stack_red(char *a, int i);
 int			ft_lstsize2(t_redirect *lst);
 void		ft_lstadd_front2(t_redirect **alst, t_redirect *new);
 void		ft_lstadd_back2(t_redirect **alst, t_redirect *new);
 t_redirect	*delete_first2(t_redirect *a);
 
 /*------------------------- MINISHELL - parse---------------------------*/
-void		parse(t_main *main);
+int			parse(t_main *main);
 int			check_quotes(char c, int open);
-void		parse_redirection(t_command *cmd);
+int			parse_redirection(t_command *cmd);
 /*------------------------------ MINISHELL - exec ----------------------*/
 void		error(void);
 char		*find_path(char *cmd, char **envp);

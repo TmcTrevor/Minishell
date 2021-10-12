@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:05:59 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/10 19:18:36 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/11 09:14:29 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,17 @@ void    split_pipe(t_main *main)
         i++;
     }
 }
-
-void    parse_pipes(t_main *main)
+int		check_piperror(t_main *main, int i)
+{
+	if (main->line[i + 1] == '|')
+		return (0);
+	while (main->line[i + 1] == ' ')
+		i++;
+	if (main->line[i + 1] == '\0')
+		return (0);
+	return (1);		
+}
+int    parse_pipes(t_main *main)
 {
     int i;
     int open;
@@ -74,6 +83,11 @@ void    parse_pipes(t_main *main)
         open = check_quotes(main->line[i], open);
         if (main->line[i] == '|' && !open)
         {
+            if (!(check_piperror(main, i)))
+            {  
+				printf("syntax error\n");
+				return (0);
+			}
             main->t[j] = i;
             main->count++;
             j++;
@@ -82,19 +96,22 @@ void    parse_pipes(t_main *main)
     }
     main->t[j] = i + 1;
     split_pipe(main);
+    return (1);
 }
 
 
 
 
-void    parse(t_main *main)
+int    parse(t_main *main)
 {
-    parse_pipes(main);
-    parse_redirection(main->cmd);
+    if (!parse_pipes(main))
+        return (0);
+    if (!parse_redirection(main->cmd))
+        return (0);
    /* while (main->cmd)
     {
       //  printf("%s\n",main->cmd->cmd);
         main->cmd = main->cmd->nextcmd;
     }*/
-    
+    return (1);
 }

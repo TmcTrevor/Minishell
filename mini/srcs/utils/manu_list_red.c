@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manu_list _red.c                                   :+:      :+:    :+:   */
+/*   manu_list_red.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:52:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/10 18:34:40 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/11 09:29:00 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_redirect  *new_stack_red(char *a)
+t_redirect  *new_stack_red(char *a, int i)
 {
 	t_redirect *stack;
 
@@ -22,6 +22,7 @@ t_redirect  *new_stack_red(char *a)
 	else
 	{
 		stack->line = ft_strdup(a);
+		stack->type = i;
 		stack->nextred = NULL;
 	}
 	return (stack);
