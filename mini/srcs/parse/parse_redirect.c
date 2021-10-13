@@ -152,10 +152,29 @@ int    get_type(t_command *cmd)
 	return (1); 
 }
 
-void	getter(t_command *cmd, int i)
+char	**getter(t_redirect *red, int i, char c)
 {
-	if (i == 0)
-		return ;
+    char **a;
+    int j;
+    j = 0;
+	if (i == 0 && (c== '>' || c == '<'))
+    {
+        a = ft_split(red->line + 1, ' ');
+        red->file = ft_strdup(a[0]);
+        a++;
+        /*printf("file = %s\n",red->file);
+       while (a[j])
+        {
+            printf("a[%d] = %s\n",j, a[j]);
+            j++;
+        }*/
+    }
+    else
+        {
+            printf("%s\n",red->line);
+        }
+
+    return a;
 }
 
 int		get_argv(t_command *cmd)
@@ -165,7 +184,8 @@ int		get_argv(t_command *cmd)
 	i = 0;
 	while (i <= cmd->count)
 	{
-		getter(cmd, i);
+		getter(cmd->redirect, i, cmd->cmd[0]);
+        cmd->redirect = cmd->redirect->nextred;
 		i++;
 	}
 	return (1);
@@ -179,8 +199,8 @@ int		file_arg(t_command *cmd)
  
     if (!get_type(cmd))
 		return (0);
-	/*if (!(get_arg(cmd)))
-		return (0);*/
+	if (!(get_argv(cmd)))
+		return (0);
 	return (1);
 }
 
