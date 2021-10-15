@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 10:59:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/11 16:37:00 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:07:52 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,17 +152,18 @@ int    get_type(t_command *cmd)
 	return (1); 
 }
 
-char	**getter(t_redirect *red, int i, char c)
+char	**getter(t_redirect *red, int i, char c, int *e)
 {
     char **a;
     int j;
     j = 0;
 	if (i == 0 && (c== '>' || c == '<'))
     {
-        a = ft_split(red->line + 1, ' ');
+        a = ft_split1(red->line + 1, ' ');
         red->file = ft_strdup(a[0]);
         a++;
-        /*printf("file = %s\n",red->file);
+        *e = 1; 
+       /* printf("file = %s\n",red->file);
        while (a[j])
         {
             printf("a[%d] = %s\n",j, a[j]);
@@ -170,24 +171,70 @@ char	**getter(t_redirect *red, int i, char c)
         }*/
     }
     else
-        {
-            printf("%s\n",red->line);
-        }
-
+    {
+		if ((red->line[0] == '>' || red->line[0] == '<'))
+		{
+			a = ft_split1(red->line + 1, ' ');
+			red->file = ft_strdup(a[0]);
+			a++;
+			
+            *e = 2;
+			/*	printf(" file = %s\n",red->file);
+		    while (a[j])
+            {
+                printf("a[%d] = %s\n",j, a[j]);
+                j++;
+            }*/
+		}
+		else
+		{
+            red->file = ft_strdup("");
+			a = ft_split1(red->line, ' ');
+         /*   while (a[j])
+            {
+                printf("a[%d] = %s\n",j, a[j]);
+                j++;
+            }*/
+			*e = 3;
+		}
+    }
     return a;
 }
-
+//void	stack_data()
 int		get_argv(t_command *cmd)
 {
 	int i;
+    int c;
+    char **a;
+	int j;
 
 	i = 0;
+    c = 0;
+	j = 0;
 	while (i <= cmd->count)
 	{
-		getter(cmd->redirect, i, cmd->cmd[0]);
+		a = getter(cmd->redirect, i, cmd->cmd[0], &c);
+        //stack_data(a,c);
+		/*if (c == 1 || c == 2)
+        printf(" file = %s\n",cmd->redirect->file);
+		while (a[j])
+        {
+            printf("a[%d] = %s\n",j, a[j]);
+            j++;
+        }
+        j = 0;*/
+        data()
         cmd->redirect = cmd->redirect->nextred;
 		i++;
 	}
+    i = 0;
+   /* while (a[i])
+    {
+		a[i] = NULL;
+        free(a[i]);
+		i++;
+	}
+	free(a);*/
 	return (1);
 }
 

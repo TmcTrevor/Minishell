@@ -8,7 +8,9 @@ SRCS =	srcs/cmd_utils.c \
 		srcs/utils/manu_list.c \
 		srcs/utils/manu_list_red.c \
 		libft/ft_split.c \
+		libft/ft_split_advanced.c \
 		libft/ft_strjoin.c \
+		libft/ft_strdjoin.c \
 		libft/ft_strlcpy.c \
 		libft/ft_strncmp.c \
 		libft/ft_strnstr.c \

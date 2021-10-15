@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/11 09:28:12 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:00:31 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strcpy(char *dest, char *src);
 char		*ft_strdup(char *src);
+char		**ft_split1(char const *s, char c);
+char        **strdjoin(char **a, char **b);
 
 /*-------------------------- command list minupilation -----------------*/
 
