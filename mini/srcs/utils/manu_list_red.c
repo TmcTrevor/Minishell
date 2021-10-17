@@ -25,6 +25,8 @@ t_redirect  *new_stack_red(char *a, int i)
 		stack->type = i;
 		stack->nextred = NULL;
 	}
+	/*if (a)
+		free(a);*/
 	return (stack);
 }
 

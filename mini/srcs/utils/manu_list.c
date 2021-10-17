@@ -24,6 +24,8 @@ t_command *new_stack(char *a)
 		stack->cmd = ft_strdup(a);
 		stack->nextcmd= NULL;
 	}
+	/*if (a)
+		free(a);*/
 	return (stack);
 }
 

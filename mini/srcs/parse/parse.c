@@ -29,8 +29,7 @@ int     check_quotes(char c, int open)
                 open = 0;
         }
         else
-                open = 2;
-       
+                open = 2;   
     }
     return (open);
 }
@@ -58,6 +57,7 @@ void    split_pipe(t_main *main)
         i++;
     }
 }
+
 int		check_piperror(t_main *main, int i)
 {
 	if (main->line[i + 1] == '|')
@@ -105,9 +105,10 @@ int    parse_pipes(t_main *main)
 int    parse(t_main *main)
 {
     if (!parse_pipes(main))
+     return (0);
+   if (!parse_redirection(main->cmd))
         return (0);
-    if (!parse_redirection(main->cmd))
-        return (0);
+
    /* while (main->cmd)
     {
       //  printf("%s\n",main->cmd->cmd);

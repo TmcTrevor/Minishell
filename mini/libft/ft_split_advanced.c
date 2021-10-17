@@ -102,6 +102,7 @@ char	**ft_split1(char const *s, char c)
 		ft_strlcpy(tab[i], next_word, next_word_len + 1);
 		i++;
 	}
+	//free(next_word);
 	tab[i] = NULL;
 	return (tab);
 }

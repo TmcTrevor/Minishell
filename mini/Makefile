@@ -29,7 +29,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 				@gcc ${CFLAGS}  -c $< -o $(<:.c=.o)
 
 $(NAME):	
-			@$(CC) -lreadline ${SRCS} -o ${NAME}
+			@$(CC) $(CFLAGS) -lreadline ${SRCS} -o ${NAME}
 			@echo "\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 all: $(NAME)

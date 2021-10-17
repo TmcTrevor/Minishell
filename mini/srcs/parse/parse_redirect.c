@@ -16,7 +16,6 @@
 void    get_count_index(t_command *cmd)
 {
     int i;
-    char **c;
     int j;
     int open;
     
@@ -137,14 +136,10 @@ int      redirect(t_command *cmd, int i)
 int    get_type(t_command *cmd)
 {
     int i;
-    int type;
 
     i = 0;
     while (i <= cmd->count)
     {
-		/*if (cmd->t[i] == 0)
-			i++;*/
-		//printf("%d\n",cmd->t[i]);
         if (!redirect(cmd, i))
 			return (0);
         i++;
@@ -152,89 +147,68 @@ int    get_type(t_command *cmd)
 	return (1); 
 }
 
-char	**getter(t_redirect *red, int i, char c, int *e)
+char	**getter(t_redirect **red, int i, char c, int *e)
 {
     char **a;
     int j;
-    j = 0;
+    j = 1;
+    if ((*red)->line[1] == '>' || (*red)->line[1] == '<')
+        j = 2;
 	if (i == 0 && (c== '>' || c == '<'))
     {
-        a = ft_split1(red->line + 1, ' ');
-        red->file = ft_strdup(a[0]);
+        a = ft_split1((*red)->line + j, ' ');
+        (*red)->file = ft_strdup(a[0]);
         a++;
         *e = 1; 
-       /* printf("file = %s\n",red->file);
-       while (a[j])
-        {
-            printf("a[%d] = %s\n",j, a[j]);
-            j++;
-        }*/
     }
     else
     {
-		if ((red->line[0] == '>' || red->line[0] == '<'))
+		if (((*red)->line[0] == '>' || (*red)->line[0] == '<'))
 		{
-			a = ft_split1(red->line + 1, ' ');
-			red->file = ft_strdup(a[0]);
+			a = ft_split1((*red)->line + j, ' ');
+			(*red)->file = ft_strdup(a[0]);
 			a++;
-			
             *e = 2;
-			/*	printf(" file = %s\n",red->file);
-		    while (a[j])
-            {
-                printf("a[%d] = %s\n",j, a[j]);
-                j++;
-            }*/
 		}
 		else
 		{
-            red->file = ft_strdup("");
-			a = ft_split1(red->line, ' ');
-         /*   while (a[j])
-            {
-                printf("a[%d] = %s\n",j, a[j]);
-                j++;
-            }*/
+            (*red)->file = ft_strdup("");
+			a = ft_split1((*red)->line, ' ');
 			*e = 3;
 		}
     }
     return a;
 }
-//void	stack_data()
+
+
 int		get_argv(t_command *cmd)
 {
 	int i;
     int c;
     char **a;
+    char **b;
 	int j;
+    int k;
+    t_redirect *l;
 
 	i = 0;
+    k = 0;
     c = 0;
 	j = 0;
+    a = NULL;
+    l = cmd->redirect;
 	while (i <= cmd->count)
 	{
-		a = getter(cmd->redirect, i, cmd->cmd[0], &c);
-        //stack_data(a,c);
-		/*if (c == 1 || c == 2)
-        printf(" file = %s\n",cmd->redirect->file);
-		while (a[j])
-        {
-            printf("a[%d] = %s\n",j, a[j]);
-            j++;
-        }
-        j = 0;*/
-        data()
+		b = getter(&cmd->redirect, i, cmd->cmd[0], &c);
+        j = 0;
+        cmd->argument = strdjoin(cmd->argument, b);
         cmd->redirect = cmd->redirect->nextred;
 		i++;
 	}
-    i = 0;
-   /* while (a[i])
-    {
-		a[i] = NULL;
-        free(a[i]);
-		i++;
-	}
-	free(a);*/
+    cmd->fcmd = cmd->argument[0];
+    cmd->argument++;
+    cmd->redirect = l;
+    //printf("line = %s\n",cmd->redirect->line);
 	return (1);
 }
 
@@ -248,21 +222,32 @@ int		file_arg(t_command *cmd)
 		return (0);
 	if (!(get_argv(cmd)))
 		return (0);
+//printf("line = %s\n",cmd->redirect->line);
 	return (1);
 }
 
 int   parse_redirection(t_command *cmd)
 {
+    int i;
+
+    i = 0;
     while (cmd)
     {
         get_count_index(cmd);
         if (!file_arg(cmd))
 			return (0);
-		/*while (cmd->redirect)
+		while (cmd->redirect)
 		{
-			printf("%s\n",cmd->redirect->line);
+            printf("line = %s\n",cmd->redirect->line);
+			printf("file = %s\n",cmd->redirect->file);
+            printf("type = %d\n",cmd->redirect->type);
 			cmd->redirect = cmd->redirect->nextred;
-		}*/
+		}
+        while (cmd->argument[i])
+        {
+            printf("argument[%d] = %s\n ",i, cmd->argument[i]);
+            i++;
+        }
         //printf("\n\n");
         cmd = cmd->nextcmd;
     }

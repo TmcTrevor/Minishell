@@ -30,20 +30,21 @@ char        **strdjoin(char **a, char **b)
 	int		i;
     char	**c;
     
-
+	if (!a)
+		return b;
+	if (!b)
+		return a;
     sa = ft_strdlen(a);
     sb = ft_strdlen(b);
 	sc = sa + sb;
 	i = 0;
-	if (!a)
-		return NULL;
-	if (!b)
-		return a;
-	c = (char **)malloc(sc + 1 * sizeof(char *));
+	c = (char **)malloc((sc + 1) * sizeof(char *));
 	while (i < sc)
 	{
 		if (i < sa)
+		//{	
 			c[i] = ft_strdup(a[i]);
+		//	printf("%s\n", )
 		else
 			c[i] = ft_strdup(b[i - sa]);
 		i++;
@@ -51,3 +52,22 @@ char        **strdjoin(char **a, char **b)
 	c[i] = NULL;
 	return c;
 }
+
+// int main(int ac, char **av)
+// {
+// 	char **c = NULL;
+// 	char **b;
+// 	int i = 0;
+// 	while (i < 9)
+// 	{
+// 		b = ft_split(av[1], ' ');
+// 		c = strdjoin(c,b);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (c[i])
+// 	{
+// 		printf("c[%d] = %s\n",i, c[i]);
+// 		i++;
+// 	}
+// }

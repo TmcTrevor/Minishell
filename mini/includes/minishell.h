@@ -101,6 +101,7 @@ int			parse_redirection(t_command *cmd);
 void		error(void);
 char		*find_path(char *cmd, char **envp);
 void		cmd_call(char *argv, char **envm);
+void		clear_all(t_main *main);
 
 /* Bonus functions */
 int			open_file(char *argv, int i);
