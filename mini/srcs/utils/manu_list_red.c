@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:52:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/11 09:29:00 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:53:53 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_redirect  *new_stack_red(char *a, int i)
 		stack->type = i;
 		stack->nextred = NULL;
 	}
-	/*if (a)
-		free(a);*/
+	if (a)
+		free(a);
 	return (stack);
 }
 

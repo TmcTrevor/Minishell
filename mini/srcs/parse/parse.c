@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:05:59 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/15 12:27:26 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:53:03 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,32 @@ int     check_quotes(char c, int open)
     if (c == '\"')
     {
         if (open == 2)
-        {
-                open = 0;
-        }
+            open = 0;
         else
-                open = 2;   
+            open = 2;   
     }
     return (open);
 }
+int     check_quotes1(char c, int open)
+{
+    
+    if (c == '\'')
+    {
+        if (open == 1)
+            open = 0;
+        else if (open != 2)
+            open = 1;
+    }    
+    if (c == '\"')
+    {
+        if (open == 2)
+           open = 0;
+        else if (open != 1)
+            open = 2;
+    }
+    return (open);
+}
+
 char    *sub_split(t_main *main, int i, int j)
 {
     char *c;
@@ -49,9 +67,9 @@ void    split_pipe(t_main *main)
     
     i = 0;
     j = 0;
+    main->cmd = NULL;
     while (i <= main->count)
     {
-        
         ft_lstadd_back1(&main->cmd,new_stack(sub_split(main,i,j)));
         j = main->t[i] + 1;
         i++;
@@ -106,7 +124,7 @@ int    parse(t_main *main)
 {
     if (!parse_pipes(main))
      return (0);
-   if (!parse_redirection(main->cmd))
+   if (!parse_redirection(main->cmd, main->env))
         return (0);
 
    /* while (main->cmd)

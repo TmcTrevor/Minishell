@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/15 15:00:31 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/20 12:27:39 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct	s_main
 {
 	char			*line;
     t_env			*env;
-	t_env			*secret_env;
     int				count;
     int				t[300];
     t_command       *cmd;
@@ -75,8 +74,10 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strcpy(char *dest, char *src);
 char		*ft_strdup(char *src);
 char		**ft_split1(char const *s, char c);
-char        **strdjoin(char **a, char **b);
-
+char		**strdjoin(char **a, char **b);
+char		*ft_strchr(const char *s, int c);
+char        *ft_joinchar(char *a, char c);
+char		*ft_strcat(char *dest, char *src);
 /*-------------------------- command list minupilation -----------------*/
 
 t_command	*new_stack(char *a);
@@ -96,7 +97,18 @@ t_redirect	*delete_first2(t_redirect *a);
 /*------------------------- MINISHELL - parse---------------------------*/
 int			parse(t_main *main);
 int			check_quotes(char c, int open);
-int			parse_redirection(t_command *cmd);
+int			check_quotes1(char c, int open);
+int			parse_redirection(t_command *cmd, t_env *env);
+char		*ignore_quotes(char *a);
+char		*dollar_check(char *c, char *s, t_env *env);
+int			env_init(t_main *main, char **env_array);
+char        **ignore_quotes1(char **s, t_env *env);
+int         check_next(char *c);
+int			redirect(t_command *cmd, int i);
+int			get_type(t_command *cmd);
+int			get_argv(t_command *cmd, t_env *env);
+char		**getter(t_redirect **red, int i, char c, int *e);
+int			check_eol(char *c, int type);
 /*------------------------------ MINISHELL - exec ----------------------*/
 void		error(void);
 char		*find_path(char *cmd, char **envp);
