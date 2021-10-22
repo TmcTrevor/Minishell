@@ -6,27 +6,70 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 09:07:20 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/20 14:09:35 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:11:22 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char    *ft_joinchar(char *a, char c)
+int	half_join_char(char *s, char c, char **str)
+{
+	if (s == NULL)
+	{
+		*str = (char *)malloc(2);
+		if (*str == NULL)
+			return (0);
+		str[0][0] = c;
+		str[0][1] = '\0';
+		return (1);
+	}
+	return (-1);
+}
+
+char    *ft_joinchar(char *s, char c)
+{
+	int		i;
+	char	*str;
+	int		r;
+
+	i = 0;
+	r = half_join_char(s, c, &str);
+	if (r == 1)
+		return (str);
+	else if (r == 0)
+		return (NULL);
+	while (s[i])
+		i++;
+	str = (char *)malloc(i + 2);
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = c;
+	str[i + 1] = '\0';
+	free(s);
+	return (str);
+}
+
+/*char    *ft_joinchar(char *a, char c)
 {
     int i;
 	char *b;
 
 	i = 0;
-	//printf("c in join = %c\n",c);
-	while (a[i])
-		i++;
+	if (*a != '\0')
+		i = ft_strlen(a);
 	b = malloc((i + 1) * sizeof(char));
-	ft_strcpy(b,a);
+	if (i > 1)
+		ft_strcpy(b,a);
 	b[i] = c;
-	b[i + 1] = '\0';
+	//b[i + 1] = '\0';
 	return (b);
-}
+}*/
 
 
 /*int main()

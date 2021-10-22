@@ -12,13 +12,6 @@ void    clear_all(t_main *main)
         t_command *c;
 
         free(main->line);
-       /*while (main->env)
-        {
-            t = main->env;
-            free(main->env->value);
-            main->env = main->env->next;
-            free(t);
-        }*/
         while (main->cmd)
         {
             c = main->cmd;
@@ -26,17 +19,31 @@ void    clear_all(t_main *main)
                 {
                     r = main->cmd->redirect;
                         free(main->cmd->redirect->line);
+						main->cmd->redirect->line = NULL;
 						if (main->cmd ->redirect->file)
-							free (main->cmd ->redirect->file);
+						{
+                            free (main->cmd ->redirect->file);
+							main->cmd->redirect->file = NULL;
+						}
                         main->cmd->redirect = main->cmd->redirect->nextred;
                     free(r);
                 }
 				if (main->cmd->argument)
 				{
 					while (main->cmd->argument[++i])
-						free(main->cmd->argument[i]);
+					{
+                        	free(main->cmd->argument[i]);
+                            main->cmd->argument[i] = NULL;
+                    }
+                    //free(main->cmd->argument);
+					//main->cmd->argument = NULL;
 				}
                 free(main->cmd->cmd);
+                if (main->cmd->fcmd)
+                {
+                    free(main->cmd->fcmd);
+                    main->cmd->fcmd = NULL;
+                }
                 main->cmd = main->cmd->nextcmd;
             free(c);
         }
@@ -53,6 +60,7 @@ int main(int ac, char **argv, char **envm)
         int i = 1;
         t_main  *main;
         main   = malloc(sizeof(t_main));
+     
         env_init(main, envm);
         while (i)
         {

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:05:59 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/20 11:53:03 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/22 11:47:24 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,14 @@ int    parse_pipes(t_main *main)
     return (1);
 }
 
-
-
-
-int    parse(t_main *main)
+int	parse(t_main *main)
 {
-    if (!parse_pipes(main))
-     return (0);
-   if (!parse_redirection(main->cmd, main->env))
-        return (0);
+	if ((*main->line) == '\0')
+		return (1);
+	if (!parse_pipes(main))
+		return (0);
+	if (!parse_redirection(main->cmd, main->env))
+		return (0);
 
    /* while (main->cmd)
     {

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:33:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/15 15:00:56 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:47:46 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ int			ft_strdlen(char **a)
 	return (i);
 }
 
+void	ft_fres(char **b)
+{
+	int i;
+
+	i = 0;
+	while (b[i])
+	{
+		free(b[i]);
+		b[i] = NULL;
+		i++;
+	}
+	//free(b);
+	b = NULL;
+}
+
 char        **strdjoin(char **a, char **b)
 {
     int		sa;
@@ -30,6 +45,7 @@ char        **strdjoin(char **a, char **b)
 	int		i;
     char	**c;
     
+	//printf("s === %s\n", *b);
 	if (!a)
 		return b;
 	if (!b)
@@ -42,14 +58,15 @@ char        **strdjoin(char **a, char **b)
 	while (i < sc)
 	{
 		if (i < sa)
-		//{	
 			c[i] = ft_strdup(a[i]);
-		//	printf("%s\n", )
 		else
 			c[i] = ft_strdup(b[i - sa]);
 		i++;
 	}
+	
 	c[i] = NULL;
+	ft_fres(a);
+	ft_fres(b);
 	return c;
 }
 

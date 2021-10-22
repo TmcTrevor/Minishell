@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/20 17:01:20 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:04:00 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ int	get_index(char *c, char w)
 }*/
 char	*check_env(char *c, char *res, t_env *env, int *k)
 {
-	printf("dasd\n");
 	while (env)
 	{
 		if (!(ft_strncmp(env->value, c, ft_strlen(c))) && env->value[ft_strlen(c)] == '=')
 		{
+			printf("sub = %s ------ env = %s\n",c, env->value +ft_strlen(c) + 1);
 			res = ft_strjoin(res, env->value + ft_strlen(c) + 1);
 			*k = 1;
 			return (res);
@@ -132,40 +132,43 @@ char	*dollar_check(char *c, char *s,t_env *env)
 	i = 0;
 	env1 = env;
 	res = (char *)malloc(1 * sizeof(char ));
+	res[0] = '\0'; 
 	while (c[i])
 		i++;
+	if (!ft_strchr(s, '$'))
+	{
+		free(res);
+		return (s);
+	}
 	sub = ft_substr(c,1,i - 2);
 	if (c[0] == '\'' && c[i - 1] == '\'' && !(strcmp(sub, s)))
+	{
+			free(sub);
 		return (s);
+	}
 	i = 0;
 	while (s[i])
 	{
-		printf("s[%d] = %c\n",i, s[i]);
 		if (s[i] == '$')
 		{
-			printf("i entered\n");
 			env1 = env;
 			j = 1;
 			k = 0;
-			//printf("%d\n", i);
 			while (!k && s[i + j - 1])
 			{
 				sub = ft_substr(s + i + 1, 0 , j);
-				printf("sub = %s\n", sub);
 				res = check_env(sub, res, env1,&k);
 				j++;
 			}
-			printf("%d\n", j);
 			i += j;
-			printf("s[%d] = |%c|\n",i, s[i]);
-	
 		}
 		else if (s[i])
 		{
-			printf("asdasdsadas;dnajlsdjkashdaksdhuashdjkashdjkas hdjkah  = %c\n", s[i]);
 			res = ft_joinchar(res, s[i]);
 			i++;
 		}
 	}
+	free(sub);
+	free(s);
     return (res);   
 }

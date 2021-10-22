@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/20 11:58:16 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/22 15:59:05 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ char    *ignore_quotes(char *a)
     i = 0;
     open = 0;
     j = 0;
-    c = (char *)malloc(1 * sizeof(char ));
+    
+   
     if (!ft_strchr(a,'\'') && !ft_strchr(a,'\"'))
-        return (a);
+        return (a); 
+    c = ft_strdup("");
     while (a[i])
     {
         while (a[i] && !(open = check_quotes1(a[i], open)))
@@ -38,7 +40,7 @@ char    *ignore_quotes(char *a)
             while (a[i] && (open = check_quotes1(a[i],open) == 1))
             {
                 
-			   c = ft_joinchar(c, a[i]);
+			c = ft_joinchar(c, a[i]);
                 i++; 
             }
             i++;
@@ -49,13 +51,14 @@ char    *ignore_quotes(char *a)
             i++;
             while (a[i] && (open = check_quotes1(a[i],open)) == 2)
             {
-				c = ft_joinchar(c, a[i]);
+			    c = ft_joinchar(c, a[i]);
                 i++; 
             }
             i++;
 
         }
     }
+    free(a);
     return (c);
    
 }
@@ -70,8 +73,8 @@ char        **ignore_quotes1(char **s, t_env *env)
     while (s[i])
     {
         c = s[i];
-        s[i] = ignore_quotes(s[i]);
-        s[i] = dollar_check(c, s[i], env);
+       s[i] = ignore_quotes(s[i]);
+       s[i] = dollar_check(c, s[i], env);
         i++;
     }
     return (s);

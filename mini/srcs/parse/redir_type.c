@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reder_type.c                                       :+:      :+:    :+:   */
+/*   redir_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:59:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/20 12:00:11 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/22 11:24:43 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int check_next(char *c)
 int      redirect(t_command *cmd, int i)
 {
     char *c;
- 
     int a;
-    
     c = ft_substr(cmd->cmd,cmd->t[i], cmd->t[i+1] - cmd->t[i]);
 	a = 0;
     if (i == 0 && (cmd->cmd[0] == '>' || cmd->cmd[0] == '<'))

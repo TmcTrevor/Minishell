@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 15:36:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/03 11:28:41 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:40:43 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	if (!s1 || !s2)
 		return (NULL);
+	//printf("s1 == %s\n", s1);
 	tab = (char *)malloc(sizeof(*tab) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (tab == 0)
 		return (NULL);

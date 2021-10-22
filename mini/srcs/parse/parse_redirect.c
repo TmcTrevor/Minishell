@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 10:59:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/20 12:02:49 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/22 15:14:32 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		file_arg(t_command *cmd, t_env *env)
     int i;
 
     i = 0;
- 
+    (void)env;
     if (!get_type(cmd))
 		return (0);
 	if (!(get_argv(cmd, env)))
@@ -89,12 +89,14 @@ int   parse_redirection(t_command *cmd, t_env *env)
     int i;
 
     i = 0;
+    cmd->redirect = NULL;
     while (cmd)
-    {
+    {   
+        //(void)env;
         get_count_index(cmd);
         if (!file_arg(cmd, env))
 			return (0);
-		while (cmd->redirect)
+	    while (cmd->redirect)
 		{
             printf("line = %s\n",cmd->redirect->line);
 			printf("file = %s\n",cmd->redirect->file);
@@ -109,7 +111,8 @@ int   parse_redirection(t_command *cmd, t_env *env)
         }
         i = 0;
         printf("--------------------------------------------\n\3");
-        cmd = cmd->nextcmd;
+        
+       cmd = cmd->nextcmd;
     }
 	return (1);   
 }

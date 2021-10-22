@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:55:16 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/15 10:25:39 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/22 11:58:09 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ char	**ft_split1(char const *s, char c)
 		ft_strlcpy(tab[i], next_word, next_word_len + 1);
 		i++;
 	}
-	//free(next_word);
 	tab[i] = NULL;
 	return (tab);
 }
