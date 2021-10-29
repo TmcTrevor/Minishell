@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 09:07:20 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/22 12:11:22 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/29 18:35:34 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ int	half_join_char(char *s, char c, char **str)
 			return (0);
 		str[0][0] = c;
 		str[0][1] = '\0';
+		
 		return (1);
 	}
 	return (-1);
 }
 
-char    *ft_joinchar(char *s, char c)
+char	*ft_joinchar(char *s, char c)
 {
 	int		i;
 	char	*str;
@@ -52,6 +53,7 @@ char    *ft_joinchar(char *s, char c)
 	str[i] = c;
 	str[i + 1] = '\0';
 	free(s);
+	s = NULL;
 	return (str);
 }
 

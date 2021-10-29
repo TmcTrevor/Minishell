@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/20 12:27:39 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/28 13:00:54 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct  s_command
 		int					t[300];
         int 				count;
         char 				**argument;
+        char                **fakearg;
         t_redirect  		*redirect;
         struct s_command	*nextcmd;
         
@@ -99,7 +100,7 @@ int			parse(t_main *main);
 int			check_quotes(char c, int open);
 int			check_quotes1(char c, int open);
 int			parse_redirection(t_command *cmd, t_env *env);
-char		*ignore_quotes(char *a);
+char		*ignore_quotes(char *a, int c);
 char		*dollar_check(char *c, char *s, t_env *env);
 int			env_init(t_main *main, char **env_array);
 char        **ignore_quotes1(char **s, t_env *env);
@@ -107,8 +108,9 @@ int         check_next(char *c);
 int			redirect(t_command *cmd, int i);
 int			get_type(t_command *cmd);
 int			get_argv(t_command *cmd, t_env *env);
-char		**getter(t_redirect **red, int i, char c, int *e);
+char		**getter(t_redirect **red, int i, char c, char ***arg);
 int			check_eol(char *c, int type);
+int         sizedoublp(char **a);
 /*------------------------------ MINISHELL - exec ----------------------*/
 void		error(void);
 char		*find_path(char *cmd, char **envp);

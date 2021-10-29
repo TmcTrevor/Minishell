@@ -37,7 +37,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 				@gcc ${CFLAGS}  -c $< -o $(<:.c=.o)
 
 $(NAME):	
-			@$(CC) $(CFLAGS) -lreadline ${SRCS} -o ${NAME} #-fsanitize=address
+			@$(CC) $(CFLAGS) -lreadline ${SRCS} -o ${NAME} -fsanitize=address
 			@echo "\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:45:39 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/20 11:30:58 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/29 18:37:36 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,17 @@ t_command *new_stack(char *a)
 	else
 	{
 		stack->cmd = ft_strdup(a);
+		stack->fcmd = NULL;
+		stack->redirect = NULL;
+		stack->argument = NULL;
+		
 		stack->nextcmd= NULL;
 	}
 	if (a)
+	{
 		free(a);
+		a = NULL;
+	}
 	return (stack);
 }
 
