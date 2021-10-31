@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 12:01:39 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/29 19:47:36 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/31 13:52:49 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ char	**getter(t_redirect **red, int i, char c, char ***arg)
 		free(a[0]);
 		a[0] = NULL;
 		*arg = a;
-		if (sizedoublp(a) > 1)
-			return (&a[1]);
-		else
-			return NULL;
+		a++;
+		return (a);
 	}
 	else
 	{
@@ -53,10 +51,9 @@ char	**getter(t_redirect **red, int i, char c, char ***arg)
 			free (a[0]);
 			a[0] = NULL;
 			*arg = a;
-		if (sizedoublp(a) > 1)
-			return (&a[1]);
-		else
-			return NULL;
+			
+			a++;
+			return (a);
 		}
 		else
 		{
@@ -71,6 +68,7 @@ char	**getter(t_redirect **red, int i, char c, char ***arg)
 int		get_argv(t_command *cmd, t_env *env)
 {
 	int i;
+	int j = 0;
 	char **b;
 	t_redirect *l;
 
@@ -85,14 +83,9 @@ int		get_argv(t_command *cmd, t_env *env)
 		{
 			b = getter(&cmd->redirect, i, cmd->cmd[0], &cmd->fakearg);
 			if (b)
-			{
-				printf("sadasd\n");
 				cmd->argument = ignore_quotes1(strdjoin(cmd->argument, b), env);
-				i = 0;
-				
-			}
 			cmd->redirect = cmd->redirect->nextred;
-			
+			free(cmd->fakearg);
 			i++;
 		}
 	}

@@ -4,6 +4,13 @@
 #include <readline/history.h>
 #include "../includes/minishell.h"
 
+
+int	ft_error(char *c)
+{
+	write(1, c, ft_strlen(c));
+	return (0);
+}
+
 void    clear_all(t_main *main)
 {
 	int i = 0;
@@ -41,27 +48,11 @@ void    clear_all(t_main *main)
 		    }
 		    if (main->cmd->argument)
 		    {
-				int j = 0;
-				//main->cmd->argument[2] =  NULL;
-				//printf("%s\n",main->cmd->argument[2]);
-			while (main->cmd->argument[j])
-			{
-
-				printf("p[%d] = %p\n", j, main->cmd->argument[j]);
-				j++;
-			}
-				//free(main->cmd->argument[2]);
-				//printf("s = %p -- %d\n", main->cmd->argument[0], i);
-			    if (sizedoublp(main->cmd->argument) > 1)
-				{
-					while (main->cmd->argument[++i])
-			    	{
-				//	printf("s = %p -- %d\n", main->cmd->argument[i], i);
-					    //if (main->cmd->argument[i])
-							free(main->cmd->argument[i]);
-					    main->cmd->argument[i] = NULL;
-			    	}
-				}
+			    while (main->cmd->argument[++i])
+			    {
+				free(main->cmd->argument[i]);
+					 main->cmd->argument[i] = NULL;
+			    }
 				free(main->cmd->argument);
 				main->cmd->argument = NULL;
 		    }
@@ -97,12 +88,6 @@ void    set_main(t_main *main)
     main->env = NULL;
     main->count = 0;
     main->cmd = NULL;
-  /* main->cmd->redirect = NULL;
-    main->cmd->argument = NULL;
-    main->cmd->cmd = NULL;
-    main->cmd->fcmd = NULL;
-    main->cmd->redirect->line = NULL;
-    main->cmd->redirect->file = NULL;*/
 }
 
 int main(int ac, char **argv, char **envm)
@@ -125,7 +110,7 @@ int main(int ac, char **argv, char **envm)
 		add_history(main->line);
         free(main->line);
 		
-       // clear_all(main);
+        clear_all(main);
 	}
 	free(main);
 	//clear_all(main);

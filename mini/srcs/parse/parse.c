@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:05:59 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/28 12:52:38 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/31 13:50:58 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int    parse_pipes(t_main *main)
 		{
 			if (!(check_piperror(main, i)))
 			{
-				printf("syntax error\n");
+				write(1, "syntax error\n", 14);
 				return (0);
 			}
 			main->t[j] = i;
@@ -153,7 +153,7 @@ int	parse(t_main *main)
 	
 	if (!check_piperror(main,-1))
 	{
-		printf("syntax error\n");
+		write(1, "syntax error\n", 14);
 		return (0);
 	}
 	if (!parse_pipes(main))

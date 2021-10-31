@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/29 19:48:17 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/31 12:35:03 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,5 @@ char        **ignore_quotes1(char **s, t_env *env)
 		c = NULL;
 		i++;
 	}
-	//printf("c1 = %p\n",c);
 	return (s);
 }

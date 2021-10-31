@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/29 20:14:14 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/10/31 12:33:07 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,13 @@ char *check_env(char *c, char *res, t_env *env)
 	{
 		if (!(ft_strncmp(env->value, c, ft_strlen(c))) && env->value[ft_strlen(c)] == '=')
 		{
-			printf("%p\n", res);
 			res = ft_strjoin(tmp, env->value + ft_strlen(c) + 1);
-			//free(res);
-			printf("%p\n", res);
 			return (res);
 		}
 		env = env->next;
 	}
+	free(tmp);
+	tmp = NULL;
 	return (res);
 }
 
@@ -137,7 +136,6 @@ char *dollar_cases(char *res, char *s, t_env *env, int *i)
 		a++;
 		k++;
 	}
-	printf("a = %d\n", a);
 	if (a % 2 == 0)
 	{
 		j = get_index(s + (*i) + k, '$');
@@ -195,7 +193,6 @@ char *dollar_check(char *c, char *s, t_env *env)
 		{
 			env1 = env;
 			res = dollar_cases(res, s, env1, &i);
-			printf("i = %d\n", i);
 		}
 		else if (s[i])
 		{
@@ -205,11 +202,9 @@ char *dollar_check(char *c, char *s, t_env *env)
 		if (i > ft_strlen(s))
 			break;
 	}
-	printf("s1 = %p\n", sub);
 	free(sub);
 	sub = NULL;
 	free(s);
 	s = NULL;
-	//printf("res =  %p\ns123 = %p\n", res, s);
 	return (res);
 }
