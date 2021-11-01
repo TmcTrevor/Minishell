@@ -12,6 +12,7 @@ SRCS =	srcs/cmd_utils.c \
 		srcs/env/env.c \
 		srcs/utils/manu_list.c \
 		srcs/utils/manu_list_red.c \
+		srcs/utils/free.c \
 		libft/ft_split.c \
 		libft/ft_split_advanced.c \
 		libft/ft_strjoin.c \

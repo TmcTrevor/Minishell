@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:05:59 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/31 13:50:58 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/01 19:08:50 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,8 @@ int	parse(t_main *main)
 	int i;
 
 	i = 0;
-	
+	if (!*main->line)
+		return (0);
 	if (!check_piperror(main,-1))
 	{
 		write(1, "syntax error\n", 14);

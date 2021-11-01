@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 12:01:39 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/31 13:52:49 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/01 19:04:33 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	**getter(t_redirect **red, int i, char c, char ***arg)
 int		get_argv(t_command *cmd, t_env *env)
 {
 	int i;
-	int j = 0;
 	char **b;
 	t_redirect *l;
 

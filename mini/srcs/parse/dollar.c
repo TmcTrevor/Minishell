@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/31 12:33:07 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/01 20:16:12 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,84 +26,6 @@ int get_index(char *c, char w)
 	return (-1);
 }
 
-/*char	*dollar_check(char *c, char *s,t_env *env)
-  {
-  int i;
-  char *sub;
-
-
-  i = 0;
-  while (c[i])
-  i++;
-  sub = ft_substr(c,1,i - 2);
-  if (c[0] == '\'' && c[i - 1] == '\'' && !(strcmp(sub, s)))
-  return (s);
-  if ((i = get_index(s, '$')) != -1)
-  {
-  while (env)
-  {
-  if (!(ft_strncmp(env->value, s + i + 1, ft_strlen(s + i) - 1)))
-  {
-//free(s);
-sub = ft_substr(s, 0, i);
-char *q = env->value + ft_strlen(s + i);
-s = ft_strcat(sub, q);
-//printf("sub == %s  -------- q = %s --- s = %s\n", sub, q,s);
-//s = ft_strdup(ft_strcat(sub,q));
-return (s);
-}
-env = env->next;
-}
-s = ft_strdup("");
-}
-return (s);   
-}*/
-
-/*char	*dollar_check(char *c, char *s,t_env *env)
-  {
-  int i;
-  int j;
-  char *sub;
-  char *res;
-  t_env *env1;
-
-  i = 0;
-  env1 = env;
-  res = (char *)malloc(1 * sizeof(char ));
-  while (c[i])
-  i++;
-  sub = ft_substr(c,1,i - 2);
-  if (c[0] == '\'' && c[i - 1] == '\'' && !(strcmp(sub, s)))
-  return (s);
-  i = 0;
-  while (s[i])
-  {
-  if (s[i] == '$')
-  {
-  j = get_index(s + i + 1, '$');
-  printf("j = %d\n", j);
-  if (j == -1)
-  j = ft_strlen(s + i) - 1;
-  sub = ft_substr(s + i ,1, j);
-  env1 = env;
-  while (env1)
-  {
-  if (!(ft_strncmp(env1->value, sub, j)) && env1->value[j] == '=')
-  {
-  res = ft_strjoin(res, env1->value + j + 1);
-  i += j;
-  }
-  env1= env1->next;
-  }	
-  }
-  else if (s[i])
-  res = ft_joinchar(res, s[i]);
-  printf("res = %s---  s[%d] = %c\n", res, i, s[i]);
-  i++;
-  }
-  return (res);   
-  }*/
-
 char *check_env(char *c, char *res, t_env *env)
 {
 	char *tmp;
@@ -122,35 +44,71 @@ char *check_env(char *c, char *res, t_env *env)
 	tmp = NULL;
 	return (res);
 }
+char	*odd_dollar(char *s, int k, int *i)
+{
+	int j;
+	char *res;
+	
+	j  = get_index(s + (*i) + k, '$');
+	if (j == -1)
+		j = ft_strlen(s + (*i));
+	res = ft_substr(s + (*i), 0, j);
+	(*i) += j;
+	return (res);	
+}
+
+char	*even_dollar(char *s, char *res, int k , int i)
+{
+	int j;
+	int a;
+	
+	a = k;
+	while (a-- > 1)
+		res = ft_joinchar(res, '$');
+	j = get_index(s + (i) + k, '$');
+	if (j == -1)
+		j = ft_strlen(s + (i));
+	return (res);
+}
+
+int	skip_dollar(char *s, int *k, int i)
+{
+	int a;
+
+	a = 0;
+	while (s[(i)] == '$')
+	{
+		a++;
+		(*k)++;
+		i++;
+	}
+	if (a % 2 == 0)
+		return (1);
+	return (0);
+}
+
+char	*random_join(char *res,int a)
+{
+	int e;
+
+	e = a;
+	while (a-- > 1)
+		res = ft_joinchar(res, '$');
+	return (res);
+}
 
 char *dollar_cases(char *res, char *s, t_env *env, int *i)
 {
 	int j;
 	int k;
-	int a;
 	char *sub;
-	a = 0;
-	k = *i;
-	while (s[k] == '$')
-	{
-		a++;
-		k++;
-	}
-	if (a % 2 == 0)
-	{
-		j = get_index(s + (*i) + k, '$');
-		if (j == -1)
-			j = ft_strlen(s + (*i));
-		res = ft_substr(s + (*i), 0, j);
-		(*i) += j;
-		return (res);
-	}
+	
+	k = 0;
+	if (skip_dollar(s, &k, (*i)))
+		return (odd_dollar(s, k, i));
 	else
 	{
-
-		a = k;
-		while (a-- > 1)
-			res = ft_joinchar(res, '$');
+		res = random_join(res, k);
 		j = get_index(s + (*i) + k, '$');
 		if (j == -1)
 			j = ft_strlen(s + (*i));
@@ -163,10 +121,14 @@ char *dollar_cases(char *res, char *s, t_env *env, int *i)
 	return (res);
 }
 
+char	*dollar_small_case(char *c, char *s)
+{
+	
+}
+
 char *dollar_check(char *c, char *s, t_env *env)
 {
 	int i;
-	//int j;
 	char *sub;
 	char *res;
 	t_env *env1;

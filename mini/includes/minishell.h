@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/28 13:00:54 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/01 19:18:44 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,9 @@ int			open_file(char *argv, int i);
 void		arg_err(void);
 void		check_cmd(char *inpt, char **cmd, char **envm);
 
+/*------------------------------------ MINISHELL FREE ----------------------*/
+void	free_cmd(t_main *main);
+void	free_redirect(t_command *cmd);
+void	free_argument(char **argument);
+void	clear_all(t_main *main);
 #endif
