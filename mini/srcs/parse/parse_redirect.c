@@ -6,12 +6,23 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 10:59:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/01 19:55:54 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/02 20:44:30 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	assign(t_command *cmd, int *i, int *j)
+{
+	if ((*i) != 0)
+	{
+		cmd->t[(*j)] = (*i);
+		cmd->count++;
+		(*j)++;
+	}
+	while (cmd->cmd[(*i) + 1] == '<' || cmd->cmd[(*i) + 1] == '>')
+				(*i)++;
+}
 
 void    get_count_index(t_command *cmd)
 {
@@ -30,20 +41,20 @@ void    get_count_index(t_command *cmd)
 		open = check_quotes(cmd->cmd[i], open);
 		if ((cmd->cmd[i] == '<' || cmd->cmd[i] == '>') && !open)
 		{
-			if (i != 0)
-			{
-				cmd->t[j] = i;
-				cmd->count++;	
-				j++;
-			}
-			while (cmd->cmd[i + 1] == '<' || cmd->cmd[i+1] == '>')
-				i++;
+			// if (i != 0)
+			// {
+			// 	cmd->t[j] = i;
+			// 	cmd->count++;	
+			// 	j++;
+			// }
+			// while (cmd->cmd[i + 1] == '<' || cmd->cmd[i+1] == '>')
+			// 	i++;
+			assign(cmd, &i, &j);
 		}
 		i++;
 	}
 	cmd->t[j] = i + 1; 
 }
-
 
 int     check_eol(char *c, int type)
 {
@@ -89,29 +100,30 @@ int   parse_redirection(t_command *cmd, t_env *env)
 	int i;
 
 	i = 0;
-	//cmd->redirect = NULL;
 	while (cmd)
 	{   
-		//(void)env;
 		get_count_index(cmd);
 		if (!file_arg(cmd, env))
 			return (0);
-		while (cmd->redirect)
-		{
-			printf("line = %s\n",cmd->redirect->line);
-			printf("file = %s\n",cmd->redirect->file);
-			printf("type = %d\n",cmd->redirect->type);
-			cmd->redirect = cmd->redirect->nextred;
-		}
-		i = 0;
-		while (cmd->argument[i])
-		{
-			printf("argument[%d] = %s\n ",i, cmd->argument[i]);
-			i++;
-		}
-		i = 0;
-		printf("--------------------------------------------\n\3");
 		cmd = cmd->nextcmd;
 	}
 	return (1);   
 }
+
+/*
+   while (cmd->redirect)
+   {
+   printf("line = %s\n",cmd->redirect->line);
+   printf("file = %s\n",cmd->redirect->file);
+   printf("type = %d\n",cmd->redirect->type);
+   cmd->redirect = cmd->redirect->nextred;
+   }
+   i = 0;
+   while (cmd->argument[i])
+   {
+   printf("argument[%d] = %s\n ",i, cmd->argument[i]);
+   i++;
+   }
+   i = 0;
+   printf("--------------------------------------------\n\3");
+   */

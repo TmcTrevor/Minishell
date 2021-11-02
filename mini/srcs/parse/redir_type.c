@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:59:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/24 09:00:23 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/02 10:51:38 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int check_next(char *c)
 
 int      redirect(t_command *cmd, int i)
 {
-	char *c;
-	int a;
+	char	*c;
+	int		a;
+	
 	c = ft_substr(cmd->cmd,cmd->t[i], cmd->t[i+1] - cmd->t[i]);
 	a = 0;
 	if (i == 0 && (cmd->cmd[0] == '>' || cmd->cmd[0] == '<'))
@@ -39,8 +40,8 @@ int      redirect(t_command *cmd, int i)
 		a = check_next(c);
 		if (a == 0)
 		{
-			printf("syntax error\n");
-			return (0);
+			free(c);
+			return (ft_error("syntax error\n"));
 		}
 
 	}
@@ -49,8 +50,8 @@ int      redirect(t_command *cmd, int i)
 		a = check_next(c);
 		if (a == 0)
 		{
-			printf("syntax error\n");
-			return (0);
+			free(c);
+			return (ft_error("syntax error\n"));
 		}
 	}
 	ft_lstadd_back2(&cmd->redirect, new_stack_red(c,a));

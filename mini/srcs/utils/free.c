@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:19:55 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/01 19:20:30 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/02 13:59:08 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void	free_argument(char **argument)
 {
 	int i;
 
-	i = 0;
+	i = -1;
 	if (argument)
 	{
 		while (argument[++i])
 		{
-			free(argument[i]);
+			if (argument[i])
+				free(argument[i]);
 			argument[i] = NULL;
 		}
 		free(argument);
@@ -45,11 +46,6 @@ void	free_cmd(t_main *main)
 		    	free(main->cmd->cmd);
             	main->cmd->cmd = NULL;
 			}
-		    if (main->cmd->fcmd)
-		    {
-			    free(main->cmd->fcmd);
-			    main->cmd->fcmd = NULL;
-		    }
 		    main->cmd = main->cmd->nextcmd;
 		    free(c);
             c = NULL;

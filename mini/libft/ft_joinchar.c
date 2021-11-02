@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 09:07:20 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/29 18:35:34 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/02 09:28:34 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	half_join_char(char *s, char c, char **str)
 			return (0);
 		str[0][0] = c;
 		str[0][1] = '\0';
-		
 		return (1);
 	}
 	return (-1);
@@ -56,28 +55,3 @@ char	*ft_joinchar(char *s, char c)
 	s = NULL;
 	return (str);
 }
-
-/*char    *ft_joinchar(char *a, char c)
-{
-    int i;
-	char *b;
-
-	i = 0;
-	if (*a != '\0')
-		i = ft_strlen(a);
-	b = malloc((i + 1) * sizeof(char));
-	if (i > 1)
-		ft_strcpy(b,a);
-	b[i] = c;
-	//b[i + 1] = '\0';
-	return (b);
-}*/
-
-
-/*int main()
-{
-	char *a = "\'e\"ch\"o\'";
-	//char c = '7';
-	//char *q = ft_joinchar(a,c);
-	//printf("%s\n",ignore_quotes(a));
-}*/

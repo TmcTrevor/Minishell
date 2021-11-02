@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:33:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/31 13:34:51 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/02 20:28:33 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			ft_strdlen(char **a)
 	return (i);
 }
 
-void	ft_fres(char **b,int a)
+void	ft_fres(char **b, int a)
 {
 	int i;
 
@@ -33,12 +33,37 @@ void	ft_fres(char **b,int a)
 		b[i] = NULL;
 		i++;
 	}
+	//b = NULL;
 	if (a == 1)
 		free(b);
 	b = NULL;
 }
 
-char        **strdjoin(char **a, char **b)
+char		**strdup2(char **b, int e)
+{
+	int i;
+	int j;
+	char **c;
+
+	j = 0;
+	if (!b)
+		return NULL;
+	i = ft_strdlen(b);
+	c = malloc((i + 1)* sizeof(char *));
+	while (j < i)
+	{
+		c[j] = ft_strdup(b[j]);
+		j++;
+	}
+	c[i] = NULL;
+	if (e == 0)
+		ft_fres(b, 1);
+	else
+		ft_fres(b, 0);
+	return (c);
+}
+
+char        **strdjoin(int e, char **a, char **b)
 {
     int		sa;
     int		sb;
@@ -47,9 +72,9 @@ char        **strdjoin(char **a, char **b)
     char	**c;
  
 	if (!a)
-		return b;
+		return (strdup2(b, e));
 	if (!b)
-		return a;
+		return (strdup2(a, e));
     sa = ft_strdlen(a);
     sb = ft_strdlen(b);
 	sc = sa + sb;
@@ -63,7 +88,6 @@ char        **strdjoin(char **a, char **b)
 			c[i] = ft_strdup(b[i  - sa]);
 		i++;
 	}
-	
 	c[i] = NULL;
 	ft_fres(a, 1);
 	ft_fres(b, 0);

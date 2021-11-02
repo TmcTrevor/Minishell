@@ -1,7 +1,16 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
+/*   Updated: 2021/11/02 10:57:59 by mokhames         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <readline/readline.h>
-#include <readline/history.h>
+
 #include "../includes/minishell.h"
 
 
@@ -32,7 +41,6 @@ int main(int ac, char **argv, char **envm)
 	{
 		env_init(main, envm);
 		main->line = readline("mokhamaes > ");
-
 		if (!ft_strncmp(main->line,"exit",4))
             i = 0;
        	parse(main);

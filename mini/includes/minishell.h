@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/01 19:18:44 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/02 20:26:53 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct	s_env
 {
@@ -26,15 +28,13 @@ typedef struct	s_env
 	struct s_env	*next;
 }					t_env;
 
-
-
-
 typedef struct s_redirect
 {
         char	*line;
         char	*file;
        //char  **argument;
         int     type;
+        int		flag;
         struct	s_redirect *nextred;
 }               t_redirect;
 
@@ -75,7 +75,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strcpy(char *dest, char *src);
 char		*ft_strdup(char *src);
 char		**ft_split1(char const *s, char c);
-char		**strdjoin(char **a, char **b);
+char		**strdjoin(int e, char **a, char **b);
 char		*ft_strchr(const char *s, int c);
 char        *ft_joinchar(char *a, char c);
 char		*ft_strcat(char *dest, char *src);
@@ -111,6 +111,17 @@ int			get_argv(t_command *cmd, t_env *env);
 char		**getter(t_redirect **red, int i, char c, char ***arg);
 int			check_eol(char *c, int type);
 int         sizedoublp(char **a);
+/*------------------------ MINISHELL - PARSE - DOLLAR ------------------*/
+int         get_index(char *c, char w);
+char        *odd_dollar(char *s, int k, int *i);
+char        *even_dollar(char *s, char *res, int k, int i);
+int         skip_dollar(char *s, int *k, int i);
+char        *random_join(char *res, int a);
+char        *dollar_check(char *c, char *s, t_env *env);
+char        *dollar_small_case(char *c, char *s);
+char        *dollar_prefix(char *s, int *i, char *res);
+char        *dollar_cases(char *res, char *s, t_env *env, int *i);
+char        *check_env(char *c, char *res, t_env *env);
 /*------------------------------ MINISHELL - exec ----------------------*/
 void		error(void);
 char		*find_path(char *cmd, char **envp);
@@ -123,8 +134,10 @@ void		arg_err(void);
 void		check_cmd(char *inpt, char **cmd, char **envm);
 
 /*------------------------------------ MINISHELL FREE ----------------------*/
-void	free_cmd(t_main *main);
-void	free_redirect(t_command *cmd);
-void	free_argument(char **argument);
-void	clear_all(t_main *main);
+void        free_cmd(t_main *main);
+void        free_redirect(t_command *cmd);
+void        free_argument(char **argument);
+void        clear_all(t_main *main);
+int         ft_error(char *c);
+
 #endif

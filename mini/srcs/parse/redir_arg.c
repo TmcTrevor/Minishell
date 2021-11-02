@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 12:01:39 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/01 19:04:33 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/02 20:32:10 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@ int		sizedoublp(char **a)
 		i++;
 	return (i);
 }
+char	**arg_fill(t_redirect **red, char ***arg, int j)
+{
+	char **a;
+	
+	a = ft_split1((*red)->line + j, ' ');
+	(*red)->file = ft_strdup(ignore_quotes(a[0], 0));
+	free(a[0]);
+	a[0] = NULL;
+	*arg = a;
+	a++;
+	if (sizedoublp(a) > 0)
+		return (a);
+	return (NULL);
+}
 
 char	**getter(t_redirect **red, int i, char c, char ***arg)
 {
@@ -34,26 +48,15 @@ char	**getter(t_redirect **red, int i, char c, char ***arg)
 		j = 2;
 	if (i == 0 && (c== '>' || c == '<'))
 	{
-		a = ft_split1((*red)->line + j, ' ');
-		(*red)->file = ft_strdup(ignore_quotes(a[0], 0));
-		free(a[0]);
-		a[0] = NULL;
-		*arg = a;
-		a++;
-		return (a);
+		(*red)->flag = 1;
+		return (arg_fill(red, arg, j));
 	}
 	else
 	{
 		if (((*red)->line[0] == '>' || (*red)->line[0] == '<'))
 		{
-			a = ft_split1((*red)->line + j, ' ');
-			(*red)->file = ft_strdup(ignore_quotes(a[0], 0));
-			free (a[0]);
-			a[0] = NULL;
-			*arg = a;
-			
-			a++;
-			return (a);
+			(*red)->flag = 0;
+			return (arg_fill(red, arg, j));
 		}
 		else
 		{
@@ -63,6 +66,21 @@ char	**getter(t_redirect **red, int i, char c, char ***arg)
 		}
 	}
 	return (0);
+}
+
+void	ft_fres1(char **b)
+{
+	int i;
+
+	i = 0;
+	while (b[i])
+	{
+		free(b[i]);
+		b[i] = NULL;
+		i++;
+	}
+	free(b);
+	b = NULL;
 }
 
 int		get_argv(t_command *cmd, t_env *env)
@@ -81,10 +99,12 @@ int		get_argv(t_command *cmd, t_env *env)
 		if (cmd->cmd)
 		{
 			b = getter(&cmd->redirect, i, cmd->cmd[0], &cmd->fakearg);
+
 			if (b)
-				cmd->argument = ignore_quotes1(strdjoin(cmd->argument, b), env);
-			cmd->redirect = cmd->redirect->nextred;
+				cmd->argument = ignore_quotes1(strdjoin(cmd->redirect->flag,cmd->argument, b), env);
 			free(cmd->fakearg);
+			cmd->fakearg = NULL;
+			cmd->redirect = cmd->redirect->nextred;
 			i++;
 		}
 	}
