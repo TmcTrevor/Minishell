@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/02 20:26:53 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/03 10:01:39 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_main
 {
 	char			*line;
     t_env			*env;
+    char            **files;
     int				count;
     int				t[300];
     t_command       *cmd;
