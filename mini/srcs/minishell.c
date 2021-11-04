@@ -6,12 +6,13 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/02 10:57:59 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/04 12:02:19 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/minishell.h"
+
 
 
 int	ft_error(char *c)
@@ -23,6 +24,7 @@ int	ft_error(char *c)
 void    set_main(t_main *main)
 {
     main->line = NULL;
+	main->files = NULL;
     main->env = NULL;
     main->count = 0;
     main->cmd = NULL;
@@ -42,12 +44,11 @@ int main(int ac, char **argv, char **envm)
 		env_init(main, envm);
 		main->line = readline("mokhamaes > ");
 		if (!ft_strncmp(main->line,"exit",4))
-            i = 0;
+        	i = 0;
        	parse(main);
 		add_history(main->line);
-        free(main->line);
-		
-        clear_all(main);
+		free(main->line);
+    	clear_all(main);
 	}
 	free(main);
 	return 0;

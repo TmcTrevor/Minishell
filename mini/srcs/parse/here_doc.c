@@ -6,37 +6,62 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 09:29:13 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/03 18:58:13 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/04 12:01:38 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	ft_fress(char **b, int j)
+{
+	int i;
 
-void	lunch_here_doc(t_main *main, int *tab, int j)
+	i = 0;
+	if (b)
+	{
+		while (b[i] && i < j)
+		{
+			free(b[i]);
+			b[i] = NULL;
+			i++;
+		}
+	}
+	b = NULL;
+}
+
+void	lunch_here_doc(t_main *main, char **tab, int j)
 {
 	int i;
 	char *c;
 
 	i = 0;
-	while (c = readline("here_doc > "))
+	int e = ft_strlen(tab[i]);
+	e  = 0;
+	while (i < j)
 	{
-		if (ft_strncmp(c, tab[i], ft_strlen(tab[i])) && i < j)
-			i++;
-		else
-		
-		
+		c = readline("here_doc > ");
+		//get_next_line(0, &c);
+		if (c)
+		{
+			if (!ft_strncmp(c, tab[i], ft_strlen(tab[i])))
+				i++;
+			else
+				main->files = strdup23(main->files, c);
+			//free(c);
+		}
 	}
 }
+
 void	execute_here_doc(t_main *main)
 {
 	t_command	*cmd1;
 	t_redirect	*red;
-	int			tab[300];
+	char		**tab;
 	int			j;
 	
 	cmd1 = main->cmd;
 	j = 0;
+	tab = NULL;
     while (cmd1)
     {
 		red = cmd1->redirect;
@@ -44,7 +69,7 @@ void	execute_here_doc(t_main *main)
 		{
 			if (red->type == 4)
 			{
-				tab[j] = red->file;
+				tab = strdup23(tab, red->file);
 				j++;
 			}
 			red = red->nextred;
@@ -52,12 +77,13 @@ void	execute_here_doc(t_main *main)
 		cmd1 = cmd1->nextcmd;
 	}
 	lunch_here_doc(main, tab,j);
+	//ft_fress(tab, j);
 }
 
-// #include "../includes/pipex.h"
+//#include "../includes/pipex.h"
 
-// // C program to illustrate
-// // pipe system call in C
+// C program to illustrate
+// pipe system call in C
 // #include <stdio.h>
 // #include <unistd.h>
 // #include <stdlib.h>
@@ -92,7 +118,6 @@ void	execute_here_doc(t_main *main)
 // 		dup2(p[0], 0);
 // 		wait(NULL);
 // 	}
-
 // 	pid_t id1;
 // 	int p2[2];
 // 	pipe(p2);
@@ -101,7 +126,7 @@ void	execute_here_doc(t_main *main)
 // 	{
 // 		close (p2[0]);
 // 		dup2(p2[1], 1);
-// 		//system("cat");
+// 		system("cat");
 // 	}
 // 	else
 // 	{

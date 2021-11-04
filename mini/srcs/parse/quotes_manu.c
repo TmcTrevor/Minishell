@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/31 12:35:03 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/04 12:19:34 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char    *ignore_quotes(char *a, int e)
 			i++;
 			while (a[i] && (open = check_quotes1(a[i],open) == 1))
 			{
-
 				c = ft_joinchar(c, a[i]);
 				i++; 
 			}
@@ -49,12 +48,12 @@ char    *ignore_quotes(char *a, int e)
 		if (open == 2)
 		{
 			i++;
+			
 			while (a[i] && (open = check_quotes1(a[i],open)) == 2)
 			{
 				c = ft_joinchar(c, a[i]);
 				i++; 
 			}
-			i++;
 
 		}
 	}

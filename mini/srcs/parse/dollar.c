@@ -6,11 +6,25 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/02 10:23:21 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/04 14:51:04 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	get_index1(char *c, char w)
+{
+	int	i;
+
+	i = 0;
+	while (c[i])
+	{
+		if (c[i] == w)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
 char	*check_env(char *c, char *res, t_env *env)
 {
@@ -49,6 +63,7 @@ char	*dollar_cases(char *res, char *s, t_env *env, int *i)
 		if (j == -1)
 			j = ft_strlen(s + (*i));
 		sub = ft_substr(s + (*i) + k, 0, j);
+		printf("sub =  %s\n", sub);
 		res = check_env(sub, res, env);
 		(*i) += j + 1;
 		free(sub);
@@ -61,10 +76,10 @@ char	*dollar_prefix(char *s, int *i, char *res)
 {
 	int	j;
 
-	j = get_index(s + (*i), '$');
+	j = get_index1(s + (*i), '$');
 	if (j == -1)
 		j = ft_strlen(s + (*i));
-	res = ft_substr(s + (*i), 0, j);
+	res = ft_strjoin(res, ft_substr(s + (*i), 0, j));
 	(*i) += j;
 	return (res);
 }
@@ -102,7 +117,7 @@ char	*dollar_check(char *c, char *s, t_env *env)
 	sub = dollar_small_case(c, s);
 	if (sub)
 		return (sub);
-	res = NULL;
+	res = ft_strdup("");
 	while (i < ft_strlen(s))
 	{
 		if (s[i] == '$')

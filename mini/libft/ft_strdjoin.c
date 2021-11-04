@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:33:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/02 20:28:33 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:43:55 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,47 @@ void	ft_fres(char **b, int a)
 	int i;
 
 	i = 0;
-	while (b[i])
+	if (b)
 	{
-		free(b[i]);
-		b[i] = NULL;
-		i++;
+		while (b[i])
+		{
+			free(b[i]);
+			b[i] = NULL;
+			i++;
+		}
 	}
 	//b = NULL;
 	if (a == 1)
 		free(b);
 	b = NULL;
+}
+char		**strdup23(char **a, char *s)
+{	
+	int 	i;
+	int 	sa;
+	char	**b;
+	
+	i = 0;
+	if (a == NULL)
+	{
+		b = malloc(2 * sizeof(char **));
+		b[0] = ft_strdup(s);
+		b[1] = NULL;
+	}
+	else
+	{
+		sa = ft_strdlen(a);
+		b = malloc((sa + 2) * sizeof(char **));
+		while (i < sa)
+		{
+			b[i] = ft_strdup(a[i]);
+			i++;
+		}
+		b[i++] = ft_strdup(s);
+		b[i] = NULL;
+	}
+	ft_fres(a, 1);
+	return (b);
 }
 
 char		**strdup2(char **b, int e)

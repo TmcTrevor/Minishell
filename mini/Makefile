@@ -6,6 +6,7 @@ SRCS =	srcs/cmd_utils.c \
 		srcs/parse/parse.c \
 		srcs/parse/parse_redirect.c \
 		srcs/parse/redir_arg.c \
+		srcs/parse/here_doc.c \
 		srcs/parse/redir_type.c \
 		srcs/parse/quotes_manu.c \
 		srcs/parse/dollar.c \
@@ -27,6 +28,7 @@ SRCS =	srcs/cmd_utils.c \
 		libft/ft_strchr.c \
 		libft/ft_joinchar.c \
 		libft/ft_strcat.c \
+		GNL/get_next_line.c \
 
 OBJS 	= ${SRCS:.c=.o}
 OBJS_LIBFT = ${LIBFT:.c=.o}
