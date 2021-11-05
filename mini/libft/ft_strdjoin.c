@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:33:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/04 10:43:55 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/05 10:35:37 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,36 @@ char        **strdjoin(int e, char **a, char **b)
 	ft_fres(b, 0);
 	return c;
 }
-
+/*char        **strdjoin_in(int e, char **a, char **b, int x)
+{
+    int		sa;
+    int		sb;
+   	int		sc;
+	int		i;
+    char	**c;
+ 
+	if (!a)
+		return (strdup2(b, e));
+	if (!b)
+		return (strdup2(a, e));
+    sa = ft_strdlen(a);
+    sb = ft_strdlen(b);
+	sc = sa + sb;
+	i = 0;
+	c = (char **)malloc((sc + 1) * sizeof(char *));
+	while (i < sc)
+	{
+		if (i < sa)
+			c[i] = ft_strdup(a[i]);
+		else
+			c[i] = ft_strdup(b[i  - sa]);
+		i++;
+	}
+	c[i] = NULL;
+	ft_fres(a, 1);
+	ft_fres(b, 0);
+	return c;
+}*/
 // int main(int ac, char **av)
 // {
 // 	char **c = NULL;

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/04 11:59:56 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/05 09:37:43 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int			check_quotes(char c, int open);
 int			check_quotes1(char c, int open);
 int			parse_redirection(t_command *cmd, t_env *env);
 char		*ignore_quotes(char *a, int c);
-char		*dollar_check(char *c, char *s, t_env *env);
 int			env_init(t_main *main, char **env_array);
 char		**ignore_quotes1(char **s, t_env *env);
 int			check_next(char *c);
@@ -124,8 +123,8 @@ char		*even_dollar(char *s, char *res, int k, int i);
 int			skip_dollar(char *s, int *k, int i);
 char		*random_join(char *res, int a);
 char		*dollar_check(char *c, char *s, t_env *env);
-char		*dollar_small_case(char *c, char *s);
-char		*dollar_prefix(char *s, int *i, char *res);
+char		*dollar_small_case(char *s);
+char		*dollar_prefix(char *s, int *i, char *res, int open);
 char		*dollar_cases(char *res, char *s, t_env *env, int *i);
 char		*check_env(char *c, char *res, t_env *env);
 /*------------------------------ MINISHELL - exec ----------------------*/

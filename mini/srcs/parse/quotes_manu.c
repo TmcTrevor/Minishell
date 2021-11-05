@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/04 12:19:34 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/05 10:44:13 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,43 @@ char    *ignore_quotes(char *a, int e)
 	return (c);
 
 }
+char		**downgrad(char **s, int i)
+{
+	int j;
+	int sa;
+
+	j = i + 1;
+	sa = ft_strdlen(s);
+	while (i < sa - 1)
+	{
+		s[i] = s[i + 1];
+		i++;
+	}
+	//free(s[i]);
+	s[i] = NULL;
+	return (s);	
+}
 
 char        **ignore_quotes1(char **s, t_env *env)
 {
 	int i;
 	char *c;
+	char **a;
 
 	i = 0;
 	(void)env;
 	while (s[i])
 	{
 		c = ft_strdup(s[i]);
-		s[i] = ignore_quotes(s[i], 0);
 		s[i] = dollar_check(c, s[i], env);
+		if ((ft_strncmp(c, s[i], ft_strlen(c))) && ft_strncmp(s[0], "echo", 4))
+		{
+			a = ft_split1(s[i], ' ');
+			s = strdjoin(1 ,s, a);
+			s = downgrad(s, i);
+		}	
+		s[i] = ignore_quotes(s[i], 0);
+		
 		free(c);
 		c = NULL;
 		i++;
