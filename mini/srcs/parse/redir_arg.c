@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 12:01:39 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/05 10:12:18 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/06 19:06:38 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	**getter(t_redirect **red, int i, char c, char ***arg)
 		{
 			(*red)->file = ft_strdup("");
 			a = ft_split1((*red)->line, ' ');
+			(*red)->flag = 0;
 			return (a);
 		}
 	}
@@ -83,7 +84,7 @@ void	ft_fres1(char **b)
 	b = NULL;
 }
 
-int		get_argv(t_command *cmd, t_env *env)
+int		get_argv(t_command *cmd, char **env)
 {
 	int i;
 	char **b;
@@ -94,12 +95,12 @@ int		get_argv(t_command *cmd, t_env *env)
 	cmd->argument = NULL;
 	l = cmd->redirect;
 	b = NULL;
+	(void)env;
 	while (i <= cmd->count)
 	{
 		if (cmd->cmd)
 		{
 			b = getter(&cmd->redirect, i, cmd->cmd[0], &cmd->fakearg);
-
 			if (b)
 				cmd->argument = ignore_quotes1(strdjoin(cmd->redirect->flag,cmd->argument, b), env);
 			free(cmd->fakearg);

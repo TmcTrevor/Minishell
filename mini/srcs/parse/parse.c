@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:05:59 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/04 12:04:42 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/06 15:03:03 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,12 @@ int	parse(t_main *main)
 	if (!parse_redirection(main->cmd, main->env))
 		return (0);
 	//execute_here_doc(main);
+	i = 0;
+	/*while (main->files[i])
+	{
+		printf("%s\n", main->files[i]);
+		i++;
+	}*/
 	
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/05 09:37:43 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:31:25 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 # include <readline/history.h>
 # include "../GNL/get_next_line.h"
 
-typedef struct	s_env
+/*typedef struct	s_env
 {
 	char			*value;
 	struct s_env	*next;
-}					t_env;
+}					char *;*/
 
 typedef struct s_redirect
 {
@@ -55,7 +55,7 @@ typedef struct  s_command
 typedef struct	s_main
 {
 	char			*line;
-    t_env			*env;
+    char            **env;
     char		    **files;
     int				count;
     int				t[300];
@@ -104,14 +104,14 @@ t_redirect	*delete_first2(t_redirect *a);
 int			parse(t_main *main);
 int			check_quotes(char c, int open);
 int			check_quotes1(char c, int open);
-int			parse_redirection(t_command *cmd, t_env *env);
+int			parse_redirection(t_command *cmd, char * *env);
 char		*ignore_quotes(char *a, int c);
 int			env_init(t_main *main, char **env_array);
-char		**ignore_quotes1(char **s, t_env *env);
+char		**ignore_quotes1(char **s, char * *env);
 int			check_next(char *c);
 int			redirect(t_command *cmd, int i);
 int			get_type(t_command *cmd);
-int			get_argv(t_command *cmd, t_env *env);
+int			get_argv(t_command *cmd, char * *env);
 char		**getter(t_redirect **red, int i, char c, char ***arg);
 int			check_eol(char *c, int type);
 int			sizedoublp(char **a);
@@ -122,16 +122,17 @@ char		*odd_dollar(char *s, int k, int *i);
 char		*even_dollar(char *s, char *res, int k, int i);
 int			skip_dollar(char *s, int *k, int i);
 char		*random_join(char *res, int a);
-char		*dollar_check(char *c, char *s, t_env *env);
+char		*dollar_check(char *s, char * *env);
 char		*dollar_small_case(char *s);
 char		*dollar_prefix(char *s, int *i, char *res, int open);
-char		*dollar_cases(char *res, char *s, t_env *env, int *i);
-char		*check_env(char *c, char *res, t_env *env);
+char		*dollar_cases(char *res, char *s, char * *env, int *i);
+char		*check_env(char *c, char *res, char * *env);
 /*------------------------------ MINISHELL - exec ----------------------*/
 void		error(void);
-char		*find_path(char *cmd, char **envp);
-void		cmd_call(char *argv, char **envm);
+char		*find_path(char *cmd, char *to_find, char **envp);
+void		cmd_call(t_command *cmd, char **envm);
 void		clear_all(t_main *main);
+int         execute(t_main *main);
 
 /* Bonus functions */
 int			open_file(char *argv, int i);
@@ -146,4 +147,5 @@ void        clear_all(t_main *main);
 int			ft_error(char *c);
 void        ft_fres(char **b, int a);
 
+char		*g_status_code;
 #endif

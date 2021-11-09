@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 09:29:13 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/04 12:01:38 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/05 18:03:30 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_fress(char **b, int j)
 			i++;
 		}
 	}
+	free(b);
 	b = NULL;
 }
 
@@ -47,7 +48,8 @@ void	lunch_here_doc(t_main *main, char **tab, int j)
 				i++;
 			else
 				main->files = strdup23(main->files, c);
-			//free(c);
+			free(c);
+			c = NULL;
 		}
 	}
 }
@@ -76,8 +78,9 @@ void	execute_here_doc(t_main *main)
 		}
 		cmd1 = cmd1->nextcmd;
 	}
-	lunch_here_doc(main, tab,j);
-	//ft_fress(tab, j);
+	if (j > 0)
+		lunch_here_doc(main, tab,j);
+	ft_fress(tab, j);
 }
 
 //#include "../includes/pipex.h"

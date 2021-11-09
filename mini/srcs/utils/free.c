@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:19:55 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/04 12:35:34 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/06 19:27:02 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,22 @@ void	free_argument(char **argument)
 		argument = NULL;
 	}
 }
+void	free_argument1(char **argument)
+{
+	int i;
 
+	i = -1;
+	if (argument)
+	{
+		while (argument[++i])
+		{
+			free(argument[i]);
+			argument[i] = NULL;
+		}
+		//free(argument);
+		argument = NULL;
+	}
+}
 void	free_cmd(t_main *main)
 {
 	t_command *c;
@@ -79,17 +94,10 @@ void	free_redirect(t_command *cmd)
 
 void    clear_all(t_main *main)
 {
-	t_env *v;
+	int	i;
 
+	i = 0;
 	free_cmd(main);
-	while (main->env)
-	{
-		v = main->env;
-		free(main->env->value);
-		main->env->value = NULL;
-		main->env = main->env->next;
-		//free_argument(main->files);
-		free(v);
-		v = NULL;
-	}
+	//free_argument1(main->files);
+	//free_argument(main->env);
 }

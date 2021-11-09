@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 10:59:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/04 12:36:00 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/06 19:36:02 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char    *sub_split2(t_command *cmd, int i, int j)
 	return (c);
 }
 
-int		file_arg(t_command *cmd, t_env *env)
+int		file_arg(t_command *cmd, char **env)
 {
 	int i;
 
@@ -95,7 +95,7 @@ int		file_arg(t_command *cmd, t_env *env)
 	return (1);
 }
 
-int   parse_redirection(t_command *cmd, t_env *env)
+int   parse_redirection(t_command *cmd, char **env)
 {
 	int i;
 
@@ -105,21 +105,21 @@ int   parse_redirection(t_command *cmd, t_env *env)
 		get_count_index(cmd);
 		if (!file_arg(cmd, env))
 			return (0);
-			   while (cmd->redirect)
-   {
-   printf("line = %s\n",cmd->redirect->line);
-   printf("file = %s\n",cmd->redirect->file);
-   printf("type = %d\n",cmd->redirect->type);
-   cmd->redirect = cmd->redirect->nextred;
-   }
-   i = 0;
-   while (cmd->argument[i])
-   {
-   printf("argument[%d] = %s\n ",i, cmd->argument[i]);
-   i++;
-   }
-   i = 0;
-   printf("--------------------------------------------\n\3");
+// 			   while (cmd->redirect)
+//    {
+//    printf("line = %s\n",cmd->redirect->line);
+//    printf("file = %s\n",cmd->redirect->file);
+//    printf("type = %d\n",cmd->redirect->type);
+//    cmd->redirect = cmd->redirect->nextred;
+//    }
+//    i = 0;
+//    while (cmd->argument[i])
+//    {
+//    printf("argument[%d] = %s\n ",i, cmd->argument[i]);
+//    i++;
+//    }
+//    i = 0;
+//    printf("--------------------------------------------\n\3");
 		cmd = cmd->nextcmd;
 	}
 	return (1);   

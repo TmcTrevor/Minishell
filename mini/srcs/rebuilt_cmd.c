@@ -6,19 +6,19 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 17:04:49 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/03 19:57:07 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/07 11:07:42 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    echoo(char **cmd)
+/*void    echoo(char **cmd)
 {
 	if (!ft_strncmp("-n",cmd[1],2))
 		printf("%s",cmd[2]);
 	else
 		printf("%s\n",cmd[1]);  
-}
+}*/
 
 void	cd(char **cmd)
 {
@@ -30,8 +30,8 @@ void    check_cmd(char *inpt, char **cmd, char **envm)
 	pid_t pid;
 	if (*cmd == NULL)
 		return ;
-    else if (!ft_strncmp("echo",cmd[0],4))
-        echoo(cmd);
+    /*else if (!ft_strncmp("echo",cmd[0],4))
+        echoo(cmd);*/
 	else if (!ft_strncmp("exit",cmd[0],4))
         exit(0);
 	else if (!ft_strncmp("cd",cmd[0],4))

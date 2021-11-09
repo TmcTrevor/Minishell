@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/05 10:44:13 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/06 19:24:44 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,20 @@ char		**downgrad(char **s, int i)
 
 	j = i + 1;
 	sa = ft_strdlen(s);
-	while (i < sa - 1)
+	//free(s[i - 1])")
+	while (i < sa)
 	{
-		s[i] = s[i + 1];
+		free(s[i]);
+		s[i] = NULL;
+		s[i] = ft_strdup(s[i + 1]);
 		i++;
 	}
-	//free(s[i]);
+	free(s[i]);
 	s[i] = NULL;
 	return (s);	
 }
 
-char        **ignore_quotes1(char **s, t_env *env)
+char        **ignore_quotes1(char **s, char **env)
 {
 	int i;
 	char *c;
@@ -93,15 +96,15 @@ char        **ignore_quotes1(char **s, t_env *env)
 	while (s[i])
 	{
 		c = ft_strdup(s[i]);
-		s[i] = dollar_check(c, s[i], env);
+		s[i] = dollar_check(s[i], env);
 		if ((ft_strncmp(c, s[i], ft_strlen(c))) && ft_strncmp(s[0], "echo", 4))
 		{
 			a = ft_split1(s[i], ' ');
 			s = strdjoin(1 ,s, a);
 			s = downgrad(s, i);
-		}	
+			ft_fres(a,1);
+		}
 		s[i] = ignore_quotes(s[i], 0);
-		
 		free(c);
 		c = NULL;
 		i++;

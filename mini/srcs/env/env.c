@@ -6,13 +6,13 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:29:05 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/24 09:01:02 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/06 19:09:21 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int				env_init(t_main *main, char **env_array)
+/*int				env_init(t_main *main, char **env_array)
 {
 	t_env	*env;
 	t_env	*new;
@@ -35,4 +35,4 @@ int				env_init(t_main *main, char **env_array)
 		i++;
 	}
 	return (0);
-}
+}*/
