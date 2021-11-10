@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/07 16:31:25 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:06:46 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ char		**getter(t_redirect **red, int i, char c, char ***arg);
 int			check_eol(char *c, int type);
 int			sizedoublp(char **a);
 void		execute_here_doc(t_main *main);
+char		**strdup23(char **a, char *s);
 /*------------------------ MINISHELL - PARSE - DOLLAR ------------------*/
 int			get_index(char *c, char w);
 char		*odd_dollar(char *s, int k, int *i);
@@ -132,7 +133,11 @@ void		error(void);
 char		*find_path(char *cmd, char *to_find, char **envp);
 void		cmd_call(t_command *cmd, char **envm);
 void		clear_all(t_main *main);
-int         execute(t_main *main);
+int			execute(t_main *main);
+char		*find_path2(char *cmd, char **env);
+char		**delete_line(char **env, char *c);
+int			cd(char **cmd, char ***env);
+int         replace(char ***env, char *c, char *to_replace);
 
 /* Bonus functions */
 int			open_file(char *argv, int i);

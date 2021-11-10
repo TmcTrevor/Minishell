@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:33:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/06 16:08:15 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/10 10:53:34 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_fres(char **b, int a)
 		free(b);
 	b = NULL;
 }
+
 char		**strdup23(char **a, char *s)
 {	
 	int 	i;

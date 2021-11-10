@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/09 16:43:10 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/10 19:05:26 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,16 @@ char	*find_path2(char *cmd, char **env)
 	i = 0;
 	sa = ft_strdlen(env);
 	scmd = ft_strlen(cmd);
-	while (ft_strnstr(env[i], cmd , scmd) == 0 && i < sa - 1)
+	while (ft_strnstr(env[i], cmd , scmd) == 0 && i < sa)
 		i++;
 	if (i == sa)
-		return NULL;
+		return (NULL);
 	else
 		path = ft_strdup(env[i] + scmd + 1);
-	return path;
+	return (path);
 }
 
-int	cd(char **cmd)
-{
-	chdir(cmd[1]);
-	return (1);
-}
+
 int 	pwd(char **env)
 {
 	(void)env;
@@ -95,15 +91,12 @@ int 	env_c(char **env)
 		}
 		i++;
 	}
+	//write(1, env[i], ft_strlen(env[i]));
 	return (1);
 }
 
-int 	builtin(t_command *cmd1, char **env)
+int 	builtin(t_command *cmd1, char ***env)
 {
-	
-	/*if (*cmd == NULL)
-		return ;*/
-	(void)env;
 	char *cmd;
 	
 	cmd = cmd1->fcmd; 
@@ -113,15 +106,15 @@ int 	builtin(t_command *cmd1, char **env)
 	else if (!ft_strncmp("exit",cmd,4))
        exit(0);
 	else if (!ft_strncmp("cd",cmd,4))
-		return (cd(cmd1->argument));
+		return (cd(cmd1->argument, env));
 	if (!ft_strncmp("pwd",cmd,4))
-		return (pwd(env));
+		return (pwd(*env));
 	else if (!ft_strncmp("search",cmd,6))
-       return (printf("%s\n", find_path2("PWD",env)));
+       return (printf("%s\n", find_path2("PWD",*env)));
 	/*else if (!ft_strncmp("unset",cmd,4))
 			return (unset(env));*/
 	if (!ft_strncmp("env",cmd,4))
-        return (env_c(env));
+        return (env_c(*env));
 	return (0);
 }
 
@@ -139,10 +132,11 @@ int 	non_builtin(t_command *cmd1, char **env)
 int	execute(t_main *main)
 {
 	t_command *cmd1;
+	
 	cmd1 = main->cmd;
 	while (cmd1)
 	{
-		if (!builtin(cmd1,main->env))
+		if (!builtin(cmd1, &main->env))
 			non_builtin(cmd1, main->env);	
 		cmd1 = cmd1->nextcmd;
 	}

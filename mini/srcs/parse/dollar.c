@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/07 16:30:58 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/10 11:37:01 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,18 @@ char	*dollar_cases(char *res, char *s, char **env, int *i)
 
 char	*dollar_prefix(char *s, int *i, char *res, int open)
 {
-	int	j;
-	char *c;
+	int		j;
+	char	*c;
+	char	*tmp;
 
 	j = get_index1(s + (*i), '$', open);
 	if (j == -1)
 		j = ft_strlen(s + (*i));
 	c = ft_substr(s + (*i), 0, j);
-	res = ft_strjoin(res, c);
+	tmp = res;
+	res = ft_strjoin(tmp, c);
+	free(tmp);
+	tmp = NULL;
 	free(c);
 	c = NULL;
 	(*i) += j;

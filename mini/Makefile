@@ -2,6 +2,7 @@ NAME = minishell
 
 SRCS =	srcs/cmd_utils.c \
 		srcs/execution/main_exec.c \
+		srcs/execution/cd.c \
 		srcs/minishell.c \
 		srcs/parse/parse.c \
 		srcs/parse/parse_redirect.c \
@@ -12,6 +13,7 @@ SRCS =	srcs/cmd_utils.c \
 		srcs/parse/dollar.c \
 		srcs/parse/dollar_util.c \
 		srcs/env/env.c \
+		srcs/env/delete.c \
 		srcs/utils/manu_list.c \
 		srcs/utils/manu_list_red.c \
 		srcs/utils/free.c \

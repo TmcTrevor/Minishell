@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/09 19:11:24 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/10 10:27:53 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    set_main(t_main *main, char **env)
     main->cmd = NULL;
 	main->env = NULL;
 	main->env = strdup21(env);
-	//main->env = delete_line(main->env,"OLDPWD");
+	main->env = delete_line(main->env, "OLDPWD");
 }
 
 int main(int ac, char **argv, char **envm)
@@ -59,10 +59,8 @@ int main(int ac, char **argv, char **envm)
 	t_main  *main;
 	main   = malloc(sizeof(t_main));
     set_main(main, envm);
-	
 	while (i)
 	{
-		
 		main->line = readline("mokhamaes > ");
 		if (!ft_strncmp(main->line,"exit",4))
         	i = 0;

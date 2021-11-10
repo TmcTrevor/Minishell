@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 15:36:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/02 09:07:28 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/10 11:38:12 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	tab[i] = '\0';
-	free(s1);
-	s1 = NULL;
+	/*free(s1);
+	s1 = NULL;*/
 	return (tab);
 }
 

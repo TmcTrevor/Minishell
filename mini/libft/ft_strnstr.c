@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 13:48:24 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/03 11:28:21 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/10 18:21:35 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 
 	i = 0;
 	j = 0;
+	if(!str)
+		return (NULL);
 	if (*to_find == '\0' || to_find == NULL)
 		return ((char *)str);
 	while (str[i] && i < len)

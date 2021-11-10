@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 17:04:49 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/07 11:07:42 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:09:01 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,26 @@
 		printf("%s\n",cmd[1]);  
 }*/
 
-void	cd(char **cmd)
-{
-	chdir(cmd[1]);
-}
 
-void    check_cmd(char *inpt, char **cmd, char **envm)
+/*void    check_cmd(char *inpt, char **cmd, char **envm)
 {
 	pid_t pid;
 	if (*cmd == NULL)
 		return ;
     /*else if (!ft_strncmp("echo",cmd[0],4))
-        echoo(cmd);*/
+        echoo(cmd);
 	else if (!ft_strncmp("exit",cmd[0],4))
         exit(0);
 	else if (!ft_strncmp("cd",cmd[0],4))
         cd(cmd);
 	/*if (!ft_strncmp("pwd",cmd[0],4))
-        exit(0);*/
+        exit(0);
 	else if (!ft_strncmp("export",cmd[0],4))
         exit(0);
 	else if (!ft_strncmp("unset",cmd[0],4))
         exit(0);
 	/*if (!ft_strncmp("env",cmd[0],4))
-        exit(0);*/
+        exit(0);
 	else 
     {
 		pid = fork();
@@ -51,4 +47,4 @@ void    check_cmd(char *inpt, char **cmd, char **envm)
 			cmd_call(inpt,envm);
 		waitpid(pid, NULL, 0);
     }
-}
+}*/
