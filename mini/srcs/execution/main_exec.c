@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/12 22:47:28 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/13 16:26:33 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ char	*find_path2(char *cmd, char **env)
 		i++;
 	if (i == sa)
 		return (NULL);
-	else
+	else if (ft_strchr(env[i], '='))
 		path = ft_strdup(env[i] + scmd + 1);
+	else
+		path = ft_strdup(cmd);
 	return (path);
 }
 

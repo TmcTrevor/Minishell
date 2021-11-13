@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:47:40 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/13 01:06:06 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/13 18:49:57 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,47 @@ void	add_quotes(char **my_env)
 	}
 }
 
+int		get_fo_index(char *c)
+{
+	int i;
+	
+	i = 0;
+	while (c[i] && c[i] != '=')
+		i++;
+	if (i == ft_strlen(c))
+		i = -1;
+	return (i);
+}
+
+/*char	*check_dollar(char *c, char **env)
+{
+	
+}*/
+
 void	add_to_export(char *c, char ***env)
 {
-	char **s;
-	s = ft_split(c, '=');
-	if (find_path2(s[0], *env))
-		replace(env,s[0],s[1]);
+
+	char *s;
+	char *fp;
+	int	i;
+
+	//checK_dollar(c, *env);
+	//printf("%s\n", c);
+	i = get_fo_index(c);
+	if (i == -1)
+	{
+		if (!find_path2(c, *env))
+			*env= strdup23(*env, c);
+		return ;
+	}
+	fp = ft_substr(c, 0, i);
+	s = ft_strchr(c, '=');
+	printf("%s\n", fp);
+	printf(" s= %s\n",s );
+	if (find_path2(fp, *env))
+		replace(env,fp,s);
 	else
-		printf("")
+		*env= strdup23(*env, c);
 }
 
 int		export(char **args, char ***env)
@@ -95,7 +128,10 @@ int		export(char **args, char ***env)
         while (args[j])
         {
             if (!check_syntax(args[j]))
-                add_to_export(args[j], env);
+           {
+				printf("**************%s\n", args[j]);
+				add_to_export(args[j], env);
+			}
             j++;
         }
     }

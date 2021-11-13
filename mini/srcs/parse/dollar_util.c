@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:16:45 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/02 10:18:46 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/13 18:28:40 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,27 @@ int	get_index(char *c, char w)
 	i = 0;
 	while (c[i])
 	{
-		if (c[i] == w || c[i] == ' ' || c[i] == '\'' || c[i] == '\"')
+		if (c[i] == w || c[i] == ' ' || c[i] == '\'' || c[i] == '\"' || c[i] == '=' || ( c[i] >= 58 && c[i] <= 64 ) || (c[i] >= 91 && c[i] <= 96) || (c[i] >= 123 && c[i] <= 126) )
 			return (i);
 		i++;
 	}
 	return (-1);
 }
+
+// 32–47 / 58–64 / 91–96 / 123–126
+// int	get_index(char *c, char w)
+// {
+// 	int	i;
+// 	(void)w;
+// 	i = 0;
+// 	while (c[i])
+// 	{
+// 		if (c[i] == ' ' || (c[i] >= 37 && c[i] >= 47) || ( c[i] >= 58 && c[i] <= 64 ) || (c[i] >= 91 && c[i] <= 96) || (c[i] >= 123 && c[i] <= 126))
+// 			return (i);
+// 		i++;
+// 	}
+// 	return (-1);
+// }
 
 char	*odd_dollar(char *s, int k, int *i)
 {
