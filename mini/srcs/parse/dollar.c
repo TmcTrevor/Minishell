@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/10 11:37:01 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/13 00:39:06 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*check_env(char *c, char *res, char **env)
 	i = 0;
 	tmp = ft_strdup(res);
 	if (!ft_strncmp(c, "?", 1))
-		return (g_status_code);
+		return (0);
 	while (env[i])
 	{
 		if (!(ft_strncmp(env[i], c, ft_strlen(c)))

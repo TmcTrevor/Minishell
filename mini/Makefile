@@ -3,6 +3,8 @@ NAME = minishell
 SRCS =	srcs/cmd_utils.c \
 		srcs/execution/main_exec.c \
 		srcs/execution/cd.c \
+		srcs/execution/syntax_error.c \
+		srcs/execution/export.c \
 		srcs/minishell.c \
 		srcs/parse/parse.c \
 		srcs/parse/parse_redirect.c \
@@ -30,6 +32,8 @@ SRCS =	srcs/cmd_utils.c \
 		libft/ft_strchr.c \
 		libft/ft_joinchar.c \
 		libft/ft_strcat.c \
+		libft/ft_isalpha.c \
+		libft/ft_isdigit.c \
 		GNL/get_next_line.c \
 
 OBJS 	= ${SRCS:.c=.o}

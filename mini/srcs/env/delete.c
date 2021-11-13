@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 16:33:53 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/10 18:24:38 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/12 22:43:06 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	replace(char ***env, char *c, char *to_replace)
 	if (e[i])
 	{
 		free(e[i]);
-		e[i] = ft_strdup(to_replace);
+		e[i] = ft_strdup(ft_strjoin(c,to_replace));
 		return (1);
 	}
 	return (0);

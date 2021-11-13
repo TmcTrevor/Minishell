@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/10 19:05:26 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/12 22:47:28 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ int 	builtin(t_command *cmd1, char ***env)
 		return (cd(cmd1->argument, env));
 	if (!ft_strncmp("pwd",cmd,4))
 		return (pwd(*env));
-	else if (!ft_strncmp("search",cmd,6))
-       return (printf("%s\n", find_path2("PWD",*env)));
+	else if (!ft_strncmp("export",cmd,6))
+       return (export(cmd1->argument, env));
 	/*else if (!ft_strncmp("unset",cmd,4))
 			return (unset(env));*/
 	if (!ft_strncmp("env",cmd,4))

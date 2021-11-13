@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/10 16:06:46 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/13 00:38:15 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ char		*ft_strcat(char *dest, char *src);
 char		**strdup2(char **b, int e);
 char		**strdup23(char **a, char *s);
 int			ft_strdlen(char **a);
+int			ft_isdigit(int c);
+int			ft_isalpha(int c);
 /*-------------------------- command list minupilation -----------------*/
 
 t_command	*new_stack(char *a);
@@ -138,7 +140,8 @@ char		*find_path2(char *cmd, char **env);
 char		**delete_line(char **env, char *c);
 int			cd(char **cmd, char ***env);
 int         replace(char ***env, char *c, char *to_replace);
-
+int			export(char **args, char ***env);
+int			check_syntax(char *arg);
 /* Bonus functions */
 int			open_file(char *argv, int i);
 void		arg_err(void);
@@ -152,5 +155,6 @@ void        clear_all(t_main *main);
 int			ft_error(char *c);
 void        ft_fres(char **b, int a);
 
-char		*g_status_code;
+int			g_status_code;
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 10:11:34 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/10 19:04:24 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/12 22:41:55 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,31 @@ int    print_senv(char **env, char *c)
 int	cd(char **cmd, char ***env)
 {
     char *noldpwd;
-   
+    char *myp;
+
+    myp = getcwd(NULL, 0);
     if (!find_path2("OLDPWD", *env))
     {
-        noldpwd = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
+        noldpwd = ft_strjoin("OLDPWD=", myp);
         *env = strdup23(*env, noldpwd);
         free(noldpwd);
         noldpwd = NULL;
     }
     if (!cmd[1])
     {
-        replace(env,"OLDPWD",getcwd(NULL, 0));
+        replace(env,"OLDPWD=",myp);
         chdir(find_path2("HOME", *env));
         noldpwd = ft_strjoin("PWD=", getcwd(NULL, 0));
-        replace(env, "PWD", noldpwd);
+        replace(env, "PWD=", noldpwd);
         free(noldpwd);
         noldpwd = NULL;
         
     }
 	else if(!chdir(cmd[1]))
     {
-        replace(env,"OLDPWD",getcwd(NULL, 0));
+        replace(env,"OLDPWD=",myp);
 		noldpwd = ft_strjoin("PWD=", getcwd(NULL, 0));
-        replace(env, "PWD", noldpwd);
+        replace(env, "PWD=", noldpwd);
         free(noldpwd);
         noldpwd = NULL;
     }
