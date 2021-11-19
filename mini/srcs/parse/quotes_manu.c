@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/13 19:01:23 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/14 16:02:17 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char    *ignore_quotes(char *a, int e)
 	open = 0;
 	j = 0;
 
-
-	if (!ft_strchr(a,'\'') && !ft_strchr(a,'\"'))
+	
+	if (!a || (!ft_strchr(a,'\'') && !ft_strchr(a,'\"')))
 		return (a); 
 	c = ft_strdup("");
 	while (a[i])

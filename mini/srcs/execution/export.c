@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:47:40 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/13 18:49:57 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/15 06:11:40 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,39 @@ int		get_fo_index(char *c)
 {
 	
 }*/
+char	**delete_from_env(char *c, char **env)
+{
+	int i;
+	int sa;
+	int j;
+	int k;
+	char *c1;
+	char **new_env;
+	i = 0;
+	j = 0;
+	
+	
+	sa = ft_strdlen(env);
+	new_env = (char **)malloc((sa) * sizeof(char *));
+	while (i < sa )
+	{
+		k = get_fo_index(env[i]);
+		if (env[i])
+		{
+			c1 = ft_substr(env[i], 0, k);
+			if (!ft_strcmp(c, c1))
+				i++;
+			free(c1);
+			c1 = NULL;
+		}
+		new_env[j] = ft_strdup(env[i]);
+		i++;
+		j++;
+	}
+	new_env[j] = NULL;
+	ft_fres(env, 1);
+	return (new_env);
+}
 
 void	add_to_export(char *c, char ***env)
 {
@@ -100,21 +133,26 @@ void	add_to_export(char *c, char ***env)
 	i = get_fo_index(c);
 	if (i == -1)
 	{
-		if (!find_path2(c, *env))
+		if (!find_path3(c, *env))
 			*env= strdup23(*env, c);
 		return ;
 	}
 	fp = ft_substr(c, 0, i);
 	s = ft_strchr(c, '=');
-	printf("%s\n", fp);
-	printf(" s= %s\n",s );
-	if (find_path2(fp, *env))
+	if (find_path3(fp, *env))
 		replace(env,fp,s);
 	else
 		*env= strdup23(*env, c);
 }
 
-int		export(char **args, char ***env)
+void	delete_from_export(char *c, char ***env)
+{
+	if (find_path3(c, *env))
+		*env = delete_from_env(c, *env);
+}
+
+
+int		export_unset(char **args, char ***env, int mode)
 {
     int i;
     int j;
@@ -129,8 +167,12 @@ int		export(char **args, char ***env)
         {
             if (!check_syntax(args[j]))
            {
-				printf("**************%s\n", args[j]);
-				add_to_export(args[j], env);
+				//printf("**************%s\n", args[j]);
+				if (mode == 1)
+					add_to_export(args[j], env);
+				if (mode == 2)
+					delete_from_export(args[j], env);
+					
 			}
             j++;
         }

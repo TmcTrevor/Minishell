@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/15 12:20:45 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/15 04:55:05 by mokhames         ###   ########.fr       */
+/*   Created: 2019/10/10 13:48:39 by mokhames          #+#    #+#             */
+/*   Updated: 2021/11/14 17:17:34 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	size_t			i;
-	unsigned char	*ss1;
-	unsigned char	*ss2;
+	int i;
 
-	ss1 = (unsigned char *)s1;
-	ss2 = (unsigned char *)s2;
 	i = 0;
-	if (n == 0)
-		return (0);
 	if (!s1 || !s2 )
 		return (-1);
-	while (ss1[i] == ss2[i] && (s1[i] != '\0' || s2[i] != '\0') && i < n - 1)
+	while ((s1[i] || s2[i]) && (s1[i] == s2[i]))
 		i++;
-	return (ss1[i] - ss2[i]);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

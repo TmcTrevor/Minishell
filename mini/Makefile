@@ -34,6 +34,7 @@ SRCS =	srcs/cmd_utils.c \
 		libft/ft_strcat.c \
 		libft/ft_isalpha.c \
 		libft/ft_isdigit.c \
+		libft/ft_strcmp.c \
 		GNL/get_next_line.c \
 
 OBJS 	= ${SRCS:.c=.o}
@@ -47,7 +48,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 				@gcc ${CFLAGS}  -c $< -o $(<:.c=.o)
 
 $(NAME):	
-			@$(CC) $(CFLAGS) -lreadline ${SRCS} -o ${NAME} -fsanitize=address -g
+			@$(CC) $(CFLAGS) -lreadline ${SRCS} -o ${NAME} #-fsanitize=address -g
 			@echo "\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 all: $(NAME)

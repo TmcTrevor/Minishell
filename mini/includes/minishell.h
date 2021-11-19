@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/13 18:09:45 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/18 03:50:52 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 	char			*value;
 	struct s_env	*next;
 }					char *;*/
+typedef struct s_tools
+{
+    int fd[2];
+    int *pid;
+    int in;
+    int i;
+    int out;
+}   t_tools;
 
 typedef struct s_redirect
 {
@@ -86,6 +94,7 @@ char		**strdup23(char **a, char *s);
 int			ft_strdlen(char **a);
 int			ft_isdigit(int c);
 int			ft_isalpha(int c);
+int		ft_strcmp(const char *s1, const char *s2);
 /*-------------------------- command list minupilation -----------------*/
 
 t_command	*new_stack(char *a);
@@ -131,16 +140,17 @@ char		*dollar_prefix(char *s, int *i, char *res, int open);
 char		*dollar_cases(char *res, char *s, char * *env, int *i);
 char		*check_env(char *c, char *res, char * *env);
 /*------------------------------ MINISHELL - exec ----------------------*/
-void		error(void);
+void		error(char *c);
 char		*find_path(char *cmd, char *to_find, char **envp);
 void		cmd_call(t_command *cmd, char **envm);
 void		clear_all(t_main *main);
 int			execute(t_main *main);
 char		*find_path2(char *cmd, char **env);
+char        *find_path3(char *cmd, char **env);
 char		**delete_line(char **env, char *c);
 int			cd(char **cmd, char ***env);
 int         replace(char ***env, char *c, char *to_replace);
-int			export(char **args, char ***env);
+int			export_unset(char **args, char ***env, int mode);
 int			check_syntax(char *arg);
 /* Bonus functions */
 int			open_file(char *argv, int i);
