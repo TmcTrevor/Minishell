@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 10:11:34 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/12 22:41:55 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/19 21:07:32 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ int	cd(char **cmd, char ***env)
 		write(1, ": No such file or directory\n", 29);
 		return (127);
 	}
-    
 	return (1);
 }

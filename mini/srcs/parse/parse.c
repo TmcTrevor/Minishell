@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:05:59 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/06 15:03:03 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/20 02:04:36 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ int	parse(t_main *main)
 		write(1, "syntax error\n", 14);
 		return (0);
 	}
+	
 	if (!parse_pipes(main))
 		return (0);
 	if (!parse_redirection(main->cmd, main->env))

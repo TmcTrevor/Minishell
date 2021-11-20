@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/19 09:13:27 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/19 21:01:50 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,18 @@ int main(int ac, char **argv, char **envm)
 	while (i)
 	{
 		main->line = readline("mokhamaes > ");
-		if (!ft_strncmp(main->line,"exit",4))
+		if (main->line)
+		{
+			if (!ft_strncmp(main->line,"exit",4))
         	i = 0;
-		parse(main);
-		execute(main);
-		add_history(main->line);
-		free(main->line);
-    	clear_all(main);
+			parse(main);
+				execute(main);
+			add_history(main->line);
+			free(main->line);
+    		clear_all(main);	
+		}
+		else
+			i = 0;
 	}
 	free(main);
 	return 0;

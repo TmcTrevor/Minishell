@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/18 03:50:52 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/20 01:56:50 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 typedef struct s_tools
 {
     int fd[2];
+    int read;
+    int write;
     int *pid;
     int in;
     int i;
@@ -152,6 +154,7 @@ int			cd(char **cmd, char ***env);
 int         replace(char ***env, char *c, char *to_replace);
 int			export_unset(char **args, char ***env, int mode);
 int			check_syntax(char *arg);
+int			redirect_to(t_command *cmd, t_tools *tools);
 /* Bonus functions */
 int			open_file(char *argv, int i);
 void		arg_err(void);

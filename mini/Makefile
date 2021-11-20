@@ -5,6 +5,7 @@ SRCS =	srcs/cmd_utils.c \
 		srcs/execution/cd.c \
 		srcs/execution/syntax_error.c \
 		srcs/execution/export.c \
+		srcs/execution/redirection.c \
 		srcs/minishell.c \
 		srcs/parse/parse.c \
 		srcs/parse/parse_redirect.c \
@@ -48,7 +49,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 				@gcc ${CFLAGS}  -c $< -o $(<:.c=.o)
 
 $(NAME):	
-			@$(CC) $(CFLAGS) -lreadline ${SRCS} -o ${NAME} #-fsanitize=address -g
+			@$(CC) $(CFLAGS) -lreadline ${SRCS} -o ${NAME} -fsanitize=address -g
 			@echo "\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 all: $(NAME)
