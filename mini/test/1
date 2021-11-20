@@ -1,12 +1,9 @@
-5
-6
-9
+GNL
 Makefile
-a.out
 error
 includes
 libft
 minishell
 minishell.dSYM
-next
 srcs
+test

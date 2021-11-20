@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:29:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/15 03:52:49 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/20 06:29:21 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*find_path(char *cmd, char *to_find, char **envp)
 	char	*part_path;
 
 	i = 0;
+	path = NULL;
 	while (ft_strnstr(envp[i], to_find , 4) == 0)
 		i++;
 	paths = ft_split(envp[i] + 5, ':');
@@ -33,6 +34,7 @@ char	*find_path(char *cmd, char *to_find, char **envp)
 			return (path);
 		i++;
 	}
+	free(path);
 	return (0);
 }
 

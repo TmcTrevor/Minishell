@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/20 02:08:01 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/20 06:23:26 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int pwd(char **env)
 	{
 		write(1, pwd, ft_strlen(pwd));
 		write(1, "\n", 1);
+		free(pwd);
+		pwd = NULL;
 		g_status_code = 0;
 	}
 	else
@@ -184,6 +186,8 @@ void execute_pipe(t_tools *tools, t_command *cmd, char ***env)
 		dup2(tools->fd[1], 1);
 		//	close(tools->write);
 		close(tools->fd[1]);
+		if (cmd->redirect)
+			redirect_to(cmd, tools);
 		if (builtin(cmd, env))
 			exit(0);
 		else
@@ -197,6 +201,7 @@ void execute_pipe(t_tools *tools, t_command *cmd, char ***env)
 		//wait(NULL);
 	}
 }
+
 void execute_lcmd(t_tools *tools, t_command *cmd, char ***env)
 {
 	tools->pid[tools->i] = fork();
@@ -220,8 +225,8 @@ int execute(t_main *main)
 	int in;
 	int out;
 
-	in = dup(1);
-	out = dup(0);
+	in = dup(STDIN_FILENO);
+	out = dup(STDOUT_FILENO);
 	
 	i = 0;
 	tools = malloc(sizeof(t_tools));
@@ -231,8 +236,7 @@ int execute(t_main *main)
 		return (0);
 	while (cmd1->nextcmd)
 	{
-		if (cmd1->redirect)
-			redirect_to(cmd1, tools);
+		
 		execute_pipe(tools, cmd1, &main->env);
 		tools->i++;
 		cmd1 = cmd1->nextcmd;

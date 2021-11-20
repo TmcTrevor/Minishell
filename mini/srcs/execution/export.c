@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:47:40 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/15 06:11:40 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/20 06:25:23 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ void	add_to_export(char *c, char ***env)
 		replace(env,fp,s);
 	else
 		*env= strdup23(*env, c);
+	free(fp);
+	free(s);
 }
 
 void	delete_from_export(char *c, char ***env)
