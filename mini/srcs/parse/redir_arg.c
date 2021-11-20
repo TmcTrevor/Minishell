@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 12:01:39 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/06 19:06:38 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/21 00:07:55 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**arg_fill(t_redirect **red, char ***arg, int j)
 	char **a;
 	
 	a = ft_split1((*red)->line + j, ' ');
-	(*red)->file = ft_strdup(ignore_quotes(a[0], 0));
+	(*red)->file = ft_strdup(ignore_quotes(a[0], 1));
 	free(a[0]);
 	a[0] = NULL;
 	*arg = a;
@@ -109,7 +109,8 @@ int		get_argv(t_command *cmd, char **env)
 			i++;
 		}
 	}
-	cmd->fcmd = cmd->argument[0];
+	//if(cmd->argument[0])
+		cmd->fcmd = cmd->argument[0];
 	cmd->redirect = l;
 	return (1);
 }

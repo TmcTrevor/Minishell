@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:29:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/20 06:29:21 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/20 22:24:46 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ char	*find_path(char *cmd, char *to_find, char **envp)
 
 void	error(char *c)
 {
-	write(1, c, ft_strlen(c));
-	write(1, " command not found\n", 19);
+	write(2, c, ft_strlen(c));
+	write(2, " command not found\n", 19);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/20 06:23:26 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/20 22:30:29 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,9 @@ int non_builtin(t_command *cmd1, char **env)
 		return (0);
 	pid = fork();
 	if (pid == 0)*/
-	cmd_call(cmd1, env);
+//	printf("%s")
+	if (*cmd1->fcmd)
+		cmd_call(cmd1, env);
 	//	waitpid(pid, NULL, 0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/14 16:02:17 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/21 00:02:50 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char    *ignore_quotes(char *a, int e)
 	return (c);
 
 }
+
 char		**downgrad(char **s, int i)
 {
 	int j;
