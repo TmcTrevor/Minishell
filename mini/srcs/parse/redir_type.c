@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:59:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/02 10:51:38 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:09:03 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int check_next(char *c)
 	return (type);
 }
 
-int      redirect(t_command *cmd, int i)
+int      redirect(t_command *cmd, int i, char **env)
 {
 	char	*c;
 	int		a;
@@ -54,18 +54,18 @@ int      redirect(t_command *cmd, int i)
 			return (ft_error("syntax error\n"));
 		}
 	}
-	ft_lstadd_back2(&cmd->redirect, new_stack_red(c,a));
+	ft_lstadd_back2(&cmd->redirect, new_stack_red(c,a, env));
 	return (1);
 }
 
-int    get_type(t_command *cmd)
+int    get_type(t_command *cmd, char **env)
 {
 	int i;
 
 	i = 0;
 	while (i <= cmd->count)
 	{
-		if (!redirect(cmd, i))
+		if (!redirect(cmd, i, env))
 			return (0);
 		i++;
 	}  

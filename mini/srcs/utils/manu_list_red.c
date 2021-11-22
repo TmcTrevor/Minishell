@@ -6,13 +6,13 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:52:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/05 13:07:27 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:15:32 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_redirect  *new_stack_red(char *a, int i)
+t_redirect  *new_stack_red(char *a, int i, char **env)
 {
 	t_redirect *stack;
 
@@ -25,6 +25,7 @@ t_redirect  *new_stack_red(char *a, int i)
 		stack->type = i;
 		stack->file = NULL;
 		stack->nextred = NULL;
+		stack->env = strdup24(env);
 	}
 	if (a)
 	{

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:19:55 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/06 19:27:02 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:30:35 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	free_argument(char **argument)
 		argument = NULL;
 	}
 }
+
 void	free_argument1(char **argument)
 {
 	int i;
@@ -44,6 +45,7 @@ void	free_argument1(char **argument)
 		argument = NULL;
 	}
 }
+
 void	free_cmd(t_main *main)
 {
 	t_command *c;
@@ -66,6 +68,7 @@ void	free_cmd(t_main *main)
         }
 	}
 }
+
 void	free_redirect(t_command *cmd)
 {
 	t_redirect *r;
@@ -85,7 +88,8 @@ void	free_redirect(t_command *cmd)
 				free (cmd ->redirect->file);
 				cmd->redirect->file = NULL;
 			}
-			cmd->redirect = cmd->redirect->nextred; 
+			free_argument(cmd->redirect->env);
+			cmd->redirect = cmd->redirect->nextred;
 			free(r);
 			r = NULL;
 		}

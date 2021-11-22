@@ -1,10 +1,12 @@
 NAME = minishell
-
+LDFLAGS=-L/goinfre/mokhames/.brew/opt/readline/lib
+CPPFLAGS=-I/goinfre/mokhames/.brew/opt/readline/include
 SRCS =	srcs/cmd_utils.c \
 		srcs/execution/main_exec.c \
 		srcs/execution/cd.c \
 		srcs/execution/syntax_error.c \
 		srcs/execution/export.c \
+		srcs/execution/signals.c \
 		srcs/execution/redirection.c \
 		srcs/minishell.c \
 		srcs/parse/parse.c \
@@ -49,7 +51,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 				@gcc ${CFLAGS}  -c $< -o $(<:.c=.o)
 
 $(NAME):	
-			@$(CC) $(CFLAGS) -lreadline ${SRCS} -o ${NAME} #-fsanitize=address -g
+			@$(CC) $(CFLAGS) -lreadline  $(LDFLAGS) $(CPPFLAGS) ${SRCS} -o ${NAME} #-fsanitize=address -g
 			@echo "\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 all: $(NAME)

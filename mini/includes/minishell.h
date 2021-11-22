@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/20 01:56:50 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:15:06 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_redirect
        //char  **argument;
         int     type;
         int		flag;
+        char	**env;
         struct	s_redirect *nextred;
 }               t_redirect;
 
@@ -73,6 +74,13 @@ typedef struct	s_main
 
 }				t_main;
 
+typedef enum e_norm
+{
+	GETEXIT,
+	SETEXIT,
+	GETPID,
+	SETPID
+ } t_norm;
 
 
 /* ----------------------- libft util --------------------------*/
@@ -93,6 +101,7 @@ char		*ft_joinchar(char *a, char c);
 char		*ft_strcat(char *dest, char *src);
 char		**strdup2(char **b, int e);
 char		**strdup23(char **a, char *s);
+char		**strdup24(char **b);
 int			ft_strdlen(char **a);
 int			ft_isdigit(int c);
 int			ft_isalpha(int c);
@@ -107,7 +116,7 @@ t_command	*delete_first(t_command *a);
 /*---------------------------------------------------------------------*/
 
 /*-------------------------- redirect list minupilation -----------------*/
-t_redirect	*new_stack_red(char *a, int i);
+t_redirect	*new_stack_red(char *a, int i, char **env);
 int			ft_lstsize2(t_redirect *lst);
 void		ft_lstadd_front2(t_redirect **alst, t_redirect *new);
 void		ft_lstadd_back2(t_redirect **alst, t_redirect *new);
@@ -122,8 +131,8 @@ char		*ignore_quotes(char *a, int c);
 int			env_init(t_main *main, char **env_array);
 char		**ignore_quotes1(char **s, char * *env);
 int			check_next(char *c);
-int			redirect(t_command *cmd, int i);
-int			get_type(t_command *cmd);
+int			redirect(t_command *cmd, int i, char **env);
+int			get_type(t_command *cmd, char **env);
 int			get_argv(t_command *cmd, char * *env);
 char		**getter(t_redirect **red, int i, char c, char ***arg);
 int			check_eol(char *c, int type);
@@ -159,7 +168,9 @@ int			redirect_to(t_command *cmd, t_tools *tools);
 int			open_file(char *argv, int i);
 void		arg_err(void);
 void		check_cmd(char *inpt, char **cmd, char **envm);
-
+/*-----------------------------------signals--------------------------------*/
+void		handle_sigint(int sigint);
+int			__get_var(t_norm op, int value);
 /*------------------------------------ MINISHELL FREE ----------------------*/
 void        free_cmd(t_main *main);
 void        free_redirect(t_command *cmd);

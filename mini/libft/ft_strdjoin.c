@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:33:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/10 10:53:34 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:12:59 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,26 @@ char		**strdup2(char **b, int e)
 		ft_fres(b, 1);
 	else
 		ft_fres(b, 0);
+	return (c);
+}
+
+char		**strdup24(char **b)
+{
+	int i;
+	int j;
+	char **c;
+
+	j = 0;
+	if (!b)
+		return NULL;
+	i = ft_strdlen(b);
+	c = malloc((i + 1)* sizeof(char *));
+	while (j < i)
+	{
+		c[j] = ft_strdup(b[j]);
+		j++;
+	}
+	c[i] = NULL;
 	return (c);
 }
 

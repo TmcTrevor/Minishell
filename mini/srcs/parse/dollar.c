@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/13 18:10:07 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 16:28:18 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ char	*dollar_check(char *s, char **env)
 	sub = dollar_small_case(s);
 	if (sub)
 		return (sub);
-	res = ft_strdup("");
+	res = NULL;
 	while (i < ft_strlen(s))
 	{
 		open = check_quotes1(s[i], open);

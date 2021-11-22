@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 10:59:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/19 08:59:42 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:07:24 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		file_arg(t_command *cmd, char **env)
 
 	i = 0;
 	(void)env;
-	if (!get_type(cmd))
+	if (!get_type(cmd, env))
 		return (0);
 	if (!(get_argv(cmd, env)))
 		return (0);

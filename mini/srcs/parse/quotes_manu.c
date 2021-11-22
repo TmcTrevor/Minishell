@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/21 00:02:50 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 16:25:15 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char        **ignore_quotes1(char **s, char **env)
 	char **a;
 
 	i = 0;
-	(void)env;
+
 	while (s[i])
 	{
 		c = ft_strdup(s[i]);

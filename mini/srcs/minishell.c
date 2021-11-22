@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/21 00:05:29 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:38:20 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int main(int ac, char **argv, char **envm)
 	(void)argv;
 	int i = 1;
 	t_main  *main;
+	__get_var(SETPID, 0);
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	
 	main   = malloc(sizeof(t_main));
     set_main(main, envm);
 	while (i)
@@ -66,8 +70,9 @@ int main(int ac, char **argv, char **envm)
 		{
 			if (!ft_strncmp(main->line,"exit",4))
         	i = 0;
+			//if (parse(main))
+			//	execute(main);
 			parse(main);
-				//execute(main);
 			add_history(main->line);
 			free(main->line);
     		clear_all(main);	
@@ -75,7 +80,10 @@ int main(int ac, char **argv, char **envm)
 		else
 			i = 0;
 	}
+	free_argument(main->env);
 	free(main);
+
+	system("leaks minishell");
 	return 0;
 }
 

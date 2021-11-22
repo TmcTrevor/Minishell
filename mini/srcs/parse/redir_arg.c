@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 12:01:39 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/21 00:07:55 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:52:19 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,28 @@ int		sizedoublp(char **a)
 char	**arg_fill(t_redirect **red, char ***arg, int j)
 {
 	char **a;
+	char *c;
+	char *q;
 	
 	a = ft_split1((*red)->line + j, ' ');
-	(*red)->file = ft_strdup(ignore_quotes(a[0], 1));
-	free(a[0]);
+	if ((*red)->type == 4)
+	{	
+		c = ignore_quotes(a[0], 1);
+		//(*red)->file = ft_strdup(ignore_quotes(a[0], 1));
+		(*red)->file = ft_strdup(c);
+		free(c);
+	}
+	else
+	{
+		c = dollar_check(a[0], (*red)->env);
+		q = ignore_quotes(c, 1);
+		(*red)->file = ft_strdup(q);
+		free(c);
+		c = NULL;
+		//free(q);
+	}
+	//	(*red)->file = ft_strdup(ignore_quotes(dollar_check(a[0], (*red)->env),  1));
+//	free(a[0]);
 	a[0] = NULL;
 	*arg = a;
 	a++;
@@ -110,7 +128,7 @@ int		get_argv(t_command *cmd, char **env)
 		}
 	}
 	//if(cmd->argument[0])
-		cmd->fcmd = cmd->argument[0];
+	cmd->fcmd = cmd->argument[0];
 	cmd->redirect = l;
 	return (1);
 }
