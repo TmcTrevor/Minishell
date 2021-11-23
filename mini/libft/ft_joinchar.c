@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 09:07:20 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/04 12:17:12 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:23:43 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	half_join_char(char *s, char c, char **str)
 	if (s == NULL)
 	{
 		*str = (char *)malloc(2);
+		//garbage(g, );
 		if (*str == NULL)
 			return (0);
 		str[0][0] = c;

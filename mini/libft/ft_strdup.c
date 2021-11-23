@@ -6,16 +6,16 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 12:50:29 by mokhames          #+#    #+#             */
-/*   Updated: 2021/10/29 20:12:28 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:23:23 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strdup(char *src)
+char *ft_strdup(char *src)
 {
-	int		i;
-	char	*dest;
+	int i;
+	char *dest;
 
 	i = 0;
 	if (!src)
@@ -23,6 +23,7 @@ char	*ft_strdup(char *src)
 	while (src[i] != '\0')
 		i++;
 	dest = (char *)malloc((i + 1) * sizeof(char));
+	garbage(g, dest);
 	if (!dest)
 		return (0);
 	ft_strcpy(dest, src);

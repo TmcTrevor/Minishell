@@ -6,13 +6,22 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/22 15:38:20 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:21:02 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/minishell.h"
 
+void        garbage(t_garbage **garbage, void *address)
+{
+    t_garbage *new;
+
+    new = (t_garbage *)malloc(sizeof(t_garbage));
+    new->next = *(garbage);
+    new->garb = address;
+    *garbage = new;
+}
 
 char		**strdup21(char **b)
 {
@@ -82,7 +91,6 @@ int main(int ac, char **argv, char **envm)
 	}
 	free_argument(main->env);
 	free(main);
-
 	system("leaks minishell");
 	return 0;
 }

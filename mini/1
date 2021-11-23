@@ -1,0 +1,10 @@
+NAME = minishell
+LDFLAGS=-L/goinfre/mokhames/.brew/opt/readline/lib
+CPPFLAGS=-I/goinfre/mokhames/.brew/opt/readline/include
+SRCS =	srcs/cmd_utils.c \
+		srcs/execution/main_exec.c \
+		srcs/execution/cd.c \
+		srcs/execution/syntax_error.c \
+		srcs/execution/export.c \
+		srcs/execution/signals.c \
+		srcs/execution/redirection.c \

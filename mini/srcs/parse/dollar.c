@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/22 16:28:18 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 13:18:49 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	get_index1(char *c, char w, int open)
 char	*check_env(char *c, char *res, char **env)
 {
 	char	*tmp;
+	char	*q;
 	int		i;
 
 	i = 0;
@@ -44,7 +45,13 @@ char	*check_env(char *c, char *res, char **env)
 			&& env[i][ft_strlen(c)] == '=')
 		{
 			free(res);
-			res = ft_strjoin(tmp, env[i] + ft_strlen(c) + 1);
+			res = NULL;
+			q = ft_strdup(env[i] + ft_strlen(c) + 1);
+			res = ft_strjoin(tmp, q);
+			free(q);
+			q = NULL;
+			free(tmp);
+			tmp = NULL;
 			return (res);
 		}
 		i++;
@@ -142,7 +149,7 @@ char	*dollar_check(char *s, char **env)
 	open = 0;
 	sub = dollar_small_case(s);
 	if (sub)
-		return (sub);
+		return (s);
 	res = NULL;
 	while (i < ft_strlen(s))
 	{

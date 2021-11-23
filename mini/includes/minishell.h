@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/22 15:15:06 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:22:47 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 	char			*value;
 	struct s_env	*next;
 }					char *;*/
+
+typedef struct s_garbage
+{
+    void *garb;
+    struct s_garbage *next;
+
+}               t_garbage;
+
 typedef struct s_tools
 {
     int fd[2];
@@ -49,6 +57,7 @@ typedef struct s_redirect
         char	**env;
         struct	s_redirect *nextred;
 }               t_redirect;
+
 
 typedef struct  s_command
 {
@@ -82,7 +91,7 @@ typedef enum e_norm
 	SETPID
  } t_norm;
 
-
+t_garbage *g;
 /* ----------------------- libft util --------------------------*/
 void		ft_putstr_fd(char *s, int fd);
 char		**ft_split(const char *str, char c);
@@ -105,7 +114,7 @@ char		**strdup24(char **b);
 int			ft_strdlen(char **a);
 int			ft_isdigit(int c);
 int			ft_isalpha(int c);
-int		ft_strcmp(const char *s1, const char *s2);
+int         ft_strcmp(const char *s1, const char *s2);
 /*-------------------------- command list minupilation -----------------*/
 
 t_command	*new_stack(char *a);
@@ -178,6 +187,7 @@ void        free_argument(char **argument);
 void        clear_all(t_main *main);
 int			ft_error(char *c);
 void        ft_fres(char **b, int a);
+void        garbage(t_garbage **garbage, void *address);
 
 int			g_status_code;
 

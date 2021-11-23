@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/20 22:30:29 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 12:07:49 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,15 @@ void execute_lcmd(t_tools *tools, t_command *cmd, char ***env)
 	//wait(NULL);
 }
 
+void	ft_free_tools(t_tools *tools)
+{
+	free(tools->pid);
+	tools->pid = NULL;
+	free(tools);
+	tools = NULL;
+		
+}
+
 int execute(t_main *main)
 {
 	t_command *cmd1;
@@ -254,5 +263,6 @@ int execute(t_main *main)
 	dup2(out, 0);
 	close(in);
 	close(out);
+	ft_free_tools(tools);
 	return (1);
 }
