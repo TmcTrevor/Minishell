@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 15:36:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 11:59:29 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:28:26 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s2)
 		return (ft_strdup(s1));
 	tab = (char *)malloc(sizeof(*tab) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	garbage(&g,tab);
 	if (tab == 0)
 		return (NULL);
 	while (s1[i])

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:47:40 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/20 06:25:23 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 22:08:13 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char	**delete_from_env(char *c, char **env)
 	
 	sa = ft_strdlen(env);
 	new_env = (char **)malloc((sa) * sizeof(char *));
+	garbage(&g, new_env);
 	while (i < sa )
 	{
 		k = get_fo_index(env[i]);
@@ -129,7 +130,6 @@ void	add_to_export(char *c, char ***env)
 	int	i;
 
 	//checK_dollar(c, *env);
-	//printf("%s\n", c);
 	i = get_fo_index(c);
 	if (i == -1)
 	{
@@ -144,7 +144,6 @@ void	add_to_export(char *c, char ***env)
 	else
 		*env= strdup23(*env, c);
 	free(fp);
-	free(s);
 }
 
 void	delete_from_export(char *c, char ***env)
@@ -174,10 +173,11 @@ int		export_unset(char **args, char ***env, int mode)
 					add_to_export(args[j], env);
 				if (mode == 2)
 					delete_from_export(args[j], env);
-					
+				
 			}
             j++;
         }
     }
+	__get_var(SETEXIT, 0);
     return (1);
 }

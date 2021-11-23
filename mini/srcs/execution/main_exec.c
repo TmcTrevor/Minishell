@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 12:07:49 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 22:12:37 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char *find_path2(char *cmd, char **env)
 	i = 0;
 	sa = ft_strdlen(env);
 	scmd = ft_strlen(cmd);
-	while (ft_strcmp(env[i], cmd) && i < sa)
+	while (!ft_strnstr(env[i], cmd, ft_strlen(cmd)) && i < sa)
 		i++;
 	if (i == sa)
 		return (NULL);
@@ -98,10 +98,10 @@ int pwd(char **env)
 		write(1, "\n", 1);
 		free(pwd);
 		pwd = NULL;
-		g_status_code = 0;
+		__get_var(SETEXIT, 0);
 	}
 	else
-		g_status_code = 1;
+		g_status_code = 130;
 	return (1);
 }
 
@@ -119,31 +119,31 @@ int env_c(char **env)
 		}
 		i++;
 	}
-	//write(1, env[i], ft_strlen(env[i]));
+	__get_var(SETEXIT, 0);
 	return (1);
 }
 
 int builtin(t_command *cmd1, char ***env)
 {
 	char *cmd;
-
+	
 	cmd = cmd1->fcmd;
 	//printf("|%s|\n", cmd);
 	if (!cmd)
 		return (0);
-	if (!ft_strncmp("echo", cmd, ft_strlen(cmd)))
+	if (!ft_strcmp("echo", cmd))
 		return (echoo(cmd1->argument));
-	else if (!ft_strncmp("exit", cmd, ft_strlen(cmd)))
+	else if (!ft_strcmp("exit", cmd))
 		exit(0);
-	else if (!ft_strncmp("cd", cmd, ft_strlen(cmd)))
+	else if (!ft_strcmp("cd", cmd))
 		return (cd(cmd1->argument, env));
-	if (!ft_strncmp("pwd", cmd, ft_strlen(cmd)))
+	if (!ft_strcmp("pwd", cmd))
 		return (pwd(*env));
-	else if (!ft_strncmp("export", cmd, ft_strlen(cmd)))
-		return (export_unset(cmd1->argument, env, ft_strlen(cmd)));
-	else if (!ft_strncmp("unset", cmd, ft_strlen(cmd)))
-		return (export_unset(cmd1->argument, env, ft_strlen(cmd)));
-	if (!ft_strncmp("env", cmd, ft_strlen(cmd)))
+	else if (!ft_strcmp("export", cmd))
+		return (export_unset(cmd1->argument, env, 1));
+	else if (!ft_strcmp("unset", cmd))
+		return (export_unset(cmd1->argument, env, 2));
+	if (!ft_strcmp("env", cmd))
 		return (env_c(*env));
 	return (0);
 }
@@ -171,6 +171,7 @@ void tools_init(int i, t_tools *tools)
 	//tools->read = dup(0);
 	//tools->write = dup(1);
 	tools->pid = (int *)malloc((i + 1) * sizeof(int));
+	garbage(&g, tools->pid);
 }
 
 void execute_pipe(t_tools *tools, t_command *cmd, char ***env)
@@ -241,6 +242,7 @@ int execute(t_main *main)
 	
 	i = 0;
 	tools = malloc(sizeof(t_tools));
+	garbage(&g, tools);
 	tools_init(main->count, tools);
 	cmd1 = main->cmd;
 	if (!cmd1->nextcmd && builtin(cmd1, &main->env))
@@ -253,6 +255,7 @@ int execute(t_main *main)
 		cmd1 = cmd1->nextcmd;
 	}
 	execute_lcmd(tools, cmd1, &main->env);
+	
 	tools->i++;
 	while (i <= main->count)
 	{
@@ -264,5 +267,6 @@ int execute(t_main *main)
 	close(in);
 	close(out);
 	ft_free_tools(tools);
+	//write(2, ft_itoa(g->status), 10);
 	return (1);
 }

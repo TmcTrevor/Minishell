@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:33:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/22 15:12:59 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:08:31 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char		**strdup23(char **a, char *s)
 	if (a == NULL)
 	{
 		b = malloc(2 * sizeof(char **));
+		garbage(&g, b);
 		b[0] = ft_strdup(s);
 		b[1] = NULL;
 	}
@@ -81,6 +82,7 @@ char		**strdup2(char **b, int e)
 		return NULL;
 	i = ft_strdlen(b);
 	c = malloc((i + 1)* sizeof(char *));
+	garbage(&g, c);
 	while (j < i)
 	{
 		c[j] = ft_strdup(b[j]);
@@ -105,6 +107,7 @@ char		**strdup24(char **b)
 		return NULL;
 	i = ft_strdlen(b);
 	c = malloc((i + 1)* sizeof(char *));
+	garbage(&g, c);
 	while (j < i)
 	{
 		c[j] = ft_strdup(b[j]);
@@ -131,6 +134,7 @@ char        **strdjoin(int e, char **a, char **b)
 	sc = sa + sb;
 	i = 0;
 	c = (char **)malloc((sc + 1) * sizeof(char *));
+	garbage(&g, c);
 	while (i < sc)
 	{
 		if (i < sa)

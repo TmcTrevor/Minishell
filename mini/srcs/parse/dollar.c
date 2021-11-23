@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 13:18:49 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 22:07:08 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	get_index1(char *c, char w, int open)
 	{
 		if (c[i] == w)
 			return (i);
-		
 		i++;
 	}
 	return (-1);
@@ -38,20 +37,14 @@ char	*check_env(char *c, char *res, char **env)
 	i = 0;
 	tmp = ft_strdup(res);
 	if (!ft_strncmp(c, "?", 1))
-		return (0);
+		return (ft_itoa(__get_var(GETEXIT,0)));
 	while (env[i])
 	{
 		if (!(ft_strncmp(env[i], c, ft_strlen(c)))
 			&& env[i][ft_strlen(c)] == '=')
 		{
-			free(res);
-			res = NULL;
 			q = ft_strdup(env[i] + ft_strlen(c) + 1);
 			res = ft_strjoin(tmp, q);
-			free(q);
-			q = NULL;
-			free(tmp);
-			tmp = NULL;
 			return (res);
 		}
 		i++;

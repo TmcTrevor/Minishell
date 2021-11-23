@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 12:50:29 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 14:23:23 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:30:24 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char *ft_strdup(char *src)
 	while (src[i] != '\0')
 		i++;
 	dest = (char *)malloc((i + 1) * sizeof(char));
-	garbage(g, dest);
+	garbage(&g, dest);
 	if (!dest)
 		return (0);
 	ft_strcpy(dest, src);

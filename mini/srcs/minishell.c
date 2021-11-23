@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 14:21:02 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:21:35 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char		**strdup21(char **b)
 		return NULL;
 	i = ft_strdlen(b);
 	c = malloc((i + 1)* sizeof(char *));
+	garbage(&g, c);
 	while (j < i)
 	{
 		c[j] = ft_strdup(b[j]);
@@ -60,6 +61,22 @@ void    set_main(t_main *main, char **env)
 	main->env = delete_line(main->env, "OLDPWD");
 }
 
+void	ft_frees(t_garbage *g)
+{
+	t_garbage *p;
+	while(g)
+	{	
+		p = g;
+		free(g->garb);
+		g->garb = NULL;
+		g = g->next;
+		free(p);
+		p = NULL;
+	}
+	free(g);
+	g = NULL;
+}
+
 int main(int ac, char **argv, char **envm)
 {
 	(void)ac;
@@ -71,17 +88,17 @@ int main(int ac, char **argv, char **envm)
 	signal(SIGQUIT, SIG_IGN);
 	
 	main   = malloc(sizeof(t_main));
+	//g->status = 0;
     set_main(main, envm);
 	while (i)
 	{
+		
 		main->line = readline("mokhamaes > ");
 		if (main->line)
 		{
-			if (!ft_strncmp(main->line,"exit",4))
-        	i = 0;
-			//if (parse(main))
-			//	execute(main);
-			parse(main);
+			if (parse(main))
+				execute(main);
+			//write(2, ft_itoa(g->status), 2);
 			add_history(main->line);
 			free(main->line);
     		clear_all(main);	
@@ -91,20 +108,7 @@ int main(int ac, char **argv, char **envm)
 	}
 	free_argument(main->env);
 	free(main);
+	ft_frees(g);
 	system("leaks minishell");
 	return 0;
 }
-
-// 4 
-// char **res;
-// char *word;
-// res = (char **)malloc((s +1) * sizeof(char **));
-// while (i < s)
-// {
-// 	word = 
-// 	res[i] = ft_strdup(word);
-// 	i++;
-// }
-// res[i] = NULL;
-// free(word);
-// return res;

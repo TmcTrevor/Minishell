@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 16:33:53 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/15 03:56:29 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:09:34 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char       **delete_line(char **env, char *c)
 	if (!find_path2(c, env))
 		return (env);
 	new_env = (char **)malloc((sa) * sizeof(char *));
+	garbage(&g, c);
 	while (i < sa - 1)
 	{
 		if (!ft_strcmp(env[i], c))

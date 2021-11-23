@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 14:22:47 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:18:54 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef enum e_norm
  } t_norm;
 
 t_garbage *g;
+
 /* ----------------------- libft util --------------------------*/
 void		ft_putstr_fd(char *s, int fd);
 char		**ft_split(const char *str, char c);
@@ -115,6 +116,7 @@ int			ft_strdlen(char **a);
 int			ft_isdigit(int c);
 int			ft_isalpha(int c);
 int         ft_strcmp(const char *s1, const char *s2);
+char		*ft_itoa(int n);
 /*-------------------------- command list minupilation -----------------*/
 
 t_command	*new_stack(char *a);

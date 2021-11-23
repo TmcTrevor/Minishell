@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:57:19 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 13:46:27 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:10:52 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char        **downgrad(char **s, int i, int sa)
     j = 0;
     k = 0;
     new_s = (char **)malloc(sa * sizeof(char *));
+	garbage(&g, new_s);
     while (j < sa - 1)
     {
         if (j == i)
@@ -92,13 +93,8 @@ char        **ignore_quotes1(char **s, char **env)
 {
 	int		i;
 	int		e;
-	//char	*s;
 	
 	e = ft_strdlen(s);
-	i = 0;
-	(void)(env);
-	//while (s[i] != '\0')
-//		printf("%p\n", s[i++]);
 	i = 0;
 	while (s[i])
 	{
@@ -106,7 +102,6 @@ char        **ignore_quotes1(char **s, char **env)
 		if (!s[i])
 		{
 			s = downgrad(s, i, e);
-			//ft_free(s);
 			e--;
 			continue;
 		}

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 12:01:39 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 13:32:28 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:33:58 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int		get_argv(t_command *cmd, char **env)
 			i++;
 		}
 	}
-	//if(cmd->argument[0])
-	cmd->fcmd = cmd->argument[0];
+	if (cmd->argument)
+		cmd->fcmd = cmd->argument[0];
 	cmd->redirect = l;
 	return (1);
 }
