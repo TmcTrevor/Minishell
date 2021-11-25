@@ -1,38 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_stdup24.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 13:48:24 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/25 12:09:56 by mokhames         ###   ########.fr       */
+/*   Created: 2021/11/25 12:57:09 by mokhames          #+#    #+#             */
+/*   Updated: 2021/11/25 13:10:13 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+char	**fillb(char *s)
 {
-	unsigned int	i;
-	int				j;
+	char **b;
 
-	i = 0;
+	b = malloc(2 * sizeof(char));
+	garbage(&g, b);
+	b[0] = ft_strdup(s);
+	b[1] = NULL;
+	return (b);
+}
+
+char	**fillc(char **c, char **a, char **b, int i)
+{
+	c[i] = NULL;
+	ft_fres(a, 1);
+	ft_fres(b, 0);
+	return (c);
+}
+
+char	**strdup24(char **b)
+{
+	int		i;
+	int		j;
+	char	**c;
+
 	j = 0;
-	if (!str)
+	if (!b)
 		return (NULL);
-	if (*to_find == '\0' || to_find == NULL)
-		return ((char *)str);
-	while (str[i] && i < len)
+	i = ft_strdlen(b);
+	c = malloc((i + 1) * sizeof(char *));
+	garbage(&g, c);
+	while (j < i)
 	{
-		j = 0;
-		while (to_find[j] == str[j + i] && i + j < len)
-		{
-			if (to_find[j + 1] == '\0')
-				return ((char *)str + i);
-			j++;
-		}
-		i++;
+		c[j] = ft_strdup(b[j]);
+		j++;
 	}
-	return (NULL);
+	c[i] = NULL;
+	return (c);
 }

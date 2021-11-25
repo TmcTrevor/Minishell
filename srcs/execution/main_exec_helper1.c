@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec_helper1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbifenzi <mbifenzi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 02:20:46 by mbifenzi          #+#    #+#             */
-/*   Updated: 2021/11/24 05:22:24 by mbifenzi         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:49:03 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ void	execute_lcmd(t_tools *tools, t_command *cmd, char ***env)
 	if (tools->pid[tools->i] == 0)
 	{
 		if (cmd->redirect)
+		{
+			//printf("adsasd\n");
 			redirect_to(cmd, tools);
-		if (builtin(cmd, env))
+		}
+		/*if (builtin(cmd, env))
 			exit(0);
-		else
+		else*/
 			non_builtin(cmd, *env);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 23:47:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/25 00:00:34 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 00:07:14 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	get_fo_index(char *c)
 		i = -1;
 	return (i);
 }
-
 
 char	**delete_from_env(int sa, char *c, char **env)
 {

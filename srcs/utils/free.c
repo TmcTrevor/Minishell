@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:19:55 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/22 15:30:35 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:46:07 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_argument(char **argument)
 {
-	int i;
+	int		i;
 
 	i = -1;
 	if (argument)
@@ -31,7 +31,7 @@ void	free_argument(char **argument)
 
 void	free_argument1(char **argument)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (argument)
@@ -41,43 +41,42 @@ void	free_argument1(char **argument)
 			free(argument[i]);
 			argument[i] = NULL;
 		}
-		//free(argument);
 		argument = NULL;
 	}
 }
 
 void	free_cmd(t_main *main)
 {
-	t_command *c;
+	t_command	*c;
 
 	if (main->cmd)
-    {
-	    while (main->cmd)
-	    {
-		    c = main->cmd;
+	{
+		while (main->cmd)
+		{
+			c = main->cmd;
 			free_redirect(main->cmd);
 			free_argument(main->cmd->argument);
 			if (main->cmd->cmd)
 			{
-		    	free(main->cmd->cmd);
-            	main->cmd->cmd = NULL;
+				free(main->cmd->cmd);
+				main->cmd->cmd = NULL;
 			}
-		    main->cmd = main->cmd->nextcmd;
-		    free(c);
-            c = NULL;
-        }
+			main->cmd = main->cmd->nextcmd;
+			free(c);
+			c = NULL;
+		}
 	}
 }
 
 void	free_redirect(t_command *cmd)
 {
-	t_redirect *r;
+	t_redirect	*r;
 
 	if (cmd->redirect)
 	{
-		while(cmd->redirect)
+		while (cmd->redirect)
 		{
-            r = cmd->redirect;
+			r = cmd->redirect;
 			if (cmd->redirect->line)
 			{
 				free(cmd->redirect->line);
@@ -96,12 +95,10 @@ void	free_redirect(t_command *cmd)
 	}
 }
 
-void    clear_all(t_main *main)
+void	clear_all(t_main *main)
 {
 	int	i;
 
 	i = 0;
 	free_cmd(main);
-	//free_argument1(main->files);
-	//free_argument(main->env);
 }

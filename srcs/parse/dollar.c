@@ -6,27 +6,11 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 22:07:08 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 02:54:15 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	get_index1(char *c, char w, int open)
-{
-	int	i;
-
-	i = 1;
-	if (open == 1)
-		w = '\'';
-	while (c[i])
-	{
-		if (c[i] == w)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 char	*check_env(char *c, char *res, char **env)
 {
@@ -37,7 +21,7 @@ char	*check_env(char *c, char *res, char **env)
 	i = 0;
 	tmp = ft_strdup(res);
 	if (!ft_strncmp(c, "?", 1))
-		return (ft_itoa(__get_var(GETEXIT,0)));
+		return (ft_itoa(__get_var(GETEXIT, 0)));
 	while (env[i])
 	{
 		if (!(ft_strncmp(env[i], c, ft_strlen(c)))
@@ -53,28 +37,6 @@ char	*check_env(char *c, char *res, char **env)
 	tmp = NULL;
 	return (res);
 }
-
-// char	*check_env(char *c, char *res, t_env *env)
-// {
-// 	char	*tmp;
-
-// 	tmp = ft_strdup(res);
-// 	while (env)
-// 	{
-// 		if (!(ft_strncmp(env->value, c, ft_strlen(c)))
-// 			&& env->value[ft_strlen(c)] == '=')
-// 		{
-// 			free(res);
-// 			res = ft_strjoin(tmp, env->value + ft_strlen(c) + 1);
-// 			return (res);
-// 		}
-// 		env = env->next;
-// 	}
-// 	free(tmp);
-// 	tmp = NULL;
-// 	return (res);
-// }
-
 
 char	*dollar_cases(char *res, char *s, char **env, int *i)
 {
@@ -123,7 +85,6 @@ char	*dollar_prefix(char *s, int *i, char *res, int open)
 char	*dollar_small_case(char *s)
 {
 	int		i;
-	//char	*sub;
 
 	i = 0;
 	if (!ft_strchr(s, '$'))

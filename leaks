@@ -1,3 +1,0 @@
-leaks in quotes with files ig : cd > "hello"
-leaks in dollar if passed an argument without a value , the next dollars leak ig (echo $q $PWD $USER)
-leaks in dollar with double quotes ig (echo "$USER")

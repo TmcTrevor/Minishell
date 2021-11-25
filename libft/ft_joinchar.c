@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 09:07:20 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 14:28:16 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:39:00 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ char	*ft_joinchar(char *s, char c)
 		i++;
 	str = (char *)malloc(i + 2);
 	garbage(&g, str);
-	if (str == NULL)
-		return (0);
 	i = 0;
 	while (s[i] != '\0')
 	{

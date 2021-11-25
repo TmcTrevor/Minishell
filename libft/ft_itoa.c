@@ -6,15 +6,15 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 19:08:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 16:10:08 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:37:02 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		n_digits(long n)
+int	n_digits(long n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (n <= 0)
@@ -30,6 +30,20 @@ int		n_digits(long n)
 	return (i);
 }
 
+int	abss(char **c, long *i)
+{
+	int	flag;
+
+	flag = 0;
+	if (*i < 0)
+	{
+		*c[0] = '-';
+		*i *= -1;
+		flag = 1;
+	}
+	return (flag);
+}
+
 char	*ft_itoa(int n)
 {
 	char	*p;
@@ -42,14 +56,10 @@ char	*ft_itoa(int n)
 	flag = 0;
 	n2 = n;
 	j = n_digits(n2);
-	if (!(p = (char *)malloc((j + 1) * sizeof(char))))
+	p = (char *)malloc((j + 1) * sizeof(char));
+	if (!p)
 		return (0);
-	if (n2 < 0)
-	{
-		flag = 1;
-		p[0] = '-';
-		n2 *= -1;
-	}
+	flag = abss(&p, &n2);
 	p[j] = '\0';
 	while (j-- > flag)
 	{

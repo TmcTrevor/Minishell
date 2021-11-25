@@ -17,10 +17,11 @@ SRCS =	srcs/cmd_utils.c \
 		srcs/parse/redir_arg.c \
 		srcs/parse/here_doc.c \
 		srcs/parse/redir_type.c \
+		srcs/parse/random.c \
+		srcs/parse/random2.c \
 		srcs/parse/quotes_manu.c \
 		srcs/parse/dollar.c \
 		srcs/parse/dollar_util.c \
-		srcs/env/env.c \
 		srcs/env/delete.c \
 		srcs/utils/manu_list.c \
 		srcs/utils/manu_list_red.c \
@@ -29,6 +30,7 @@ SRCS =	srcs/cmd_utils.c \
 		libft/ft_split_advanced.c \
 		libft/ft_strjoin.c \
 		libft/ft_strdjoin.c \
+		libft/ft_stdup24.c \
 		libft/ft_strlcpy.c \
 		libft/ft_strncmp.c \
 		libft/ft_strnstr.c \

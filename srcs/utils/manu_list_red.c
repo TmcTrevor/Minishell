@@ -6,15 +6,15 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:52:26 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/22 15:15:32 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:46:30 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_redirect  *new_stack_red(char *a, int i, char **env)
+t_redirect	*new_stack_red(char *a, int i, char **env)
 {
-	t_redirect *stack;
+	t_redirect	*stack;
 
 	stack = (t_redirect *)malloc(sizeof(t_redirect));
 	if (!stack)
@@ -37,7 +37,7 @@ t_redirect  *new_stack_red(char *a, int i, char **env)
 
 int	ft_lstsize2(t_redirect *lst)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (lst)
@@ -57,7 +57,7 @@ void	ft_lstadd_front2(t_redirect **alst, t_redirect *new)
 
 void	ft_lstadd_back2(t_redirect **alst, t_redirect *new)
 {
-	t_redirect *t;
+	t_redirect	*t;
 
 	t = *alst;
 	if (*alst == 0)
@@ -74,14 +74,14 @@ void	ft_lstadd_back2(t_redirect **alst, t_redirect *new)
 	}
 }
 
-t_redirect *delete_first2(t_redirect *a)
+t_redirect	*delete_first2(t_redirect *a)
 {
+	t_redirect	*tmp;
+
 	if (a == NULL)
 		return (0);
-	t_redirect *tmp;
-
 	tmp = a;
 	a = a->nextred;
 	free(tmp);
-	return a;
+	return (a);
 }

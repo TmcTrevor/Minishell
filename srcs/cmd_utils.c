@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:29:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/23 21:02:51 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:56:13 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*find_path(char *cmd, char *to_find, char **envp)
 
 	i = 0;
 	path = NULL;
-	while (ft_strnstr(envp[i], to_find , 4) == 0)
+	while (ft_strnstr(envp[i], to_find, 4) == 0)
 		i++;
 	paths = ft_split(envp[i] + 5, ':');
 	i = 0;
@@ -49,11 +49,10 @@ void	cmd_call(t_command *cmd, char **envm)
 {
 	char	*file_path;
 
-	//cmd = ft_split(argv, ' ');
-	 if (!ft_strncmp(cmd->fcmd, "./", 2))
-	 	file_path = ft_strdup(cmd->fcmd);
-	 else
-		file_path = find_path(cmd->fcmd,"PATH", envm);
+	if (!ft_strncmp(cmd->fcmd, "./", 2))
+		file_path = ft_strdup(cmd->fcmd);
+	else
+		file_path = find_path(cmd->fcmd, "PATH", envm);
 	if (execve(file_path, cmd->argument, envm) == -1)
 		return (error(cmd->argument[0]));
 }

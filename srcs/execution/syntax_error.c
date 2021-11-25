@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 23:07:32 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/13 00:46:39 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 02:49:27 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	syn_error(char *c)
 
 int	check_syntax(char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (arg[0] == '=')

@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/25 00:00:57 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:10:26 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,9 @@ int			check_eol(char *c, int type);
 int			sizedoublp(char **a);
 void		execute_here_doc(t_main *main);
 char		**strdup23(char **a, char *s);
+char		*sub_split(t_main *main, int i, int j);
+int			get_pipe(t_main *main, int *ope, int *j, int *i);
+int			check_piperror(t_main *main, int i);
 /*------------------------ MINISHELL - PARSE - DOLLAR ------------------*/
 int			get_index(char *c, char w);
 char		*odd_dollar(char *s, int k, int *i);
@@ -161,6 +164,9 @@ char		*dollar_small_case(char *s);
 char		*dollar_prefix(char *s, int *i, char *res, int open);
 char		*dollar_cases(char *res, char *s, char * *env, int *i);
 char		*check_env(char *c, char *res, char * *env);
+char		**helfer(t_redirect **red, char ***arg, int j);
+char		**arg_fill(t_redirect **red, char ***arg, int j);
+char		*join(char *a, char *c, int *open, int *i);
 /*------------------------------ MINISHELL - exec ----------------------*/
 int			non_builtin(t_command *cmd1, char **env);
 int			builtin(t_command *cmd1, char ***env);
@@ -173,6 +179,10 @@ void		execute_lcmd(t_tools *tools, t_command *cmd, char ***env);
 int			check_option(char **args);
 void		all_waits(t_main *main, t_tools *tools);
 char		**delete_from_env(int sa, char *c, char **env);
+char		*ignore_loop(char *a, char *c);
+char		**strdup21(char **b);
+char        **fillc(char **c, char **a, char **b, int i);
+char        **fillb(char *s);
 /*------------------------------ MINISHELL - exec 2 ----------------------*/
 int			echoo(char **args);
 void		error(char *c);
@@ -191,6 +201,8 @@ int			redirect_to(t_command *cmd, t_tools *tools);
 int			get_fo_index(char *c);
 void		add_quotes(char **my_env);
 char		**return_free(char **env, char **new_env);
+int			get_index1(char *c, char w, int open);
+void		assign(t_command *cmd, int *i, int *j);
 /* Bonus functions */
 int			open_file(char *argv, int i);
 void		arg_err(void);
