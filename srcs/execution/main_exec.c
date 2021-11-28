@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbifenzi <mbifenzi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/24 21:19:29 by mbifenzi         ###   ########.fr       */
+/*   Updated: 2021/11/28 21:30:08 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ int	execute(t_main *main)
 
 	in = dup(STDIN_FILENO);
 	out = dup(STDOUT_FILENO);
+	__get_var(SETPID, -1);
 	tools = malloc(sizeof(t_tools));
 	garbage(&g, tools);
 	tools_init(main->count, tools);
 	cmd1 = main->cmd;
-	if (!cmd1->nextcmd && builtin(cmd1, &main->env))
-		return (0);
+	if (!ft_simple(cmd1, &main->env, tools))
+		return (execute_helper(in, out, tools));
 	while (cmd1->nextcmd)
 	{
 		execute_pipe(tools, cmd1, &main->env);

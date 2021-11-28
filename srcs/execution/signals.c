@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 03:57:11 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/24 23:14:26 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/28 21:32:33 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,32 @@ void	handle_sigint(int sigint)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 		__get_var(SETEXIT, 130);
 	}
+}
+
+void	handle_sigint_herdoc(int sigint)
+{
+	(void)sigint;
+	write(1, "\n", 1);
+	__get_var(SETEXIT, 1);
+	exit(1);
+}
+
+int	ft_simple(t_command *cmd, char ***env, t_tools *tools)
+{
+	if (!cmd->nextcmd && !cmd->redirect->nextred)
+	{
+		if (builtin(cmd, env))
+			return (0);
+	}
+	if (!cmd->nextcmd && cmd->redirect->nextred)
+	{
+		redirect_to(cmd, tools);
+		if (builtin(cmd, env))
+			return (0);
+	}
+	return (1);
 }

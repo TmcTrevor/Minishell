@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 00:18:00 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/25 14:54:39 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:38:09 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	open_file(char *argv, int i)
 		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (i == 2)
 		file = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	else if (i == 3)
+	else if (i == 3 || i == 4)
 		file = open(argv, O_RDONLY, 0777);
 	if (file == -1)
 		error1(argv, i);
@@ -48,12 +48,12 @@ int	open_file(char *argv, int i)
 
 void	dup_n_close(int fdin, int fdout)
 {
-	if (fdin > -1)
+	if (fdin > 2)
 	{
 		dup2(fdin, 0);
 		close(fdin);
 	}
-	if (fdout > -1)
+	if (fdout > 2)
 	{
 		dup2(fdout, 1);
 		close(fdout);
@@ -67,14 +67,12 @@ int	redirect_to(t_command *cmd, t_tools *tools)
 	int			fdout;
 
 	(void)tools;
-	fdin = -1;
-	fdout = -1;
+	fdin = 0;
+	fdout = 1;
 	red = cmd->redirect;
-	while (red)
+	while (red && __get_var(GETEXIT, 2) != -1)
 	{
-		// write(2 , red->file, ft_strlen(red->file));
-		// write(2,"\n", 1);
-		if (red->type == 3)
+		if (red->type == 3 || red->type == 4)
 			fdin = open_file(red->file, red->type);
 		if (red->type == 1 || red->type == 2)
 			fdout = open_file(red->file, red->type);

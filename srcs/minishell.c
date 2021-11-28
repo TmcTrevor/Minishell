@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/25 09:54:05 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/28 17:30:51 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ int	main(int ac, char **argv, char **envm)
 			clear_all(main);
 		}
 	}
+	system("leaks minishell");
 	return (0);
 }

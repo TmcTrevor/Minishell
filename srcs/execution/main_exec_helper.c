@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 02:18:16 by mbifenzi          #+#    #+#             */
-/*   Updated: 2021/11/25 14:56:40 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/28 21:54:26 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	pwd(char **env)
 		__get_var(SETEXIT, 0);
 	}
 	else
-		g_status_code = 130;
+		__get_var(SETEXIT, 130);
 	return (1);
 }
 
@@ -59,7 +59,7 @@ int	builtin(t_command *cmd1, char ***env)
 	if (!ft_strcmp("echo", cmd))
 		return (echoo(cmd1->argument));
 	else if (!ft_strcmp("exit", cmd))
-		exit(0);
+		ft_exit(cmd1->argument);
 	else if (!ft_strcmp("cd", cmd))
 		return (cd(cmd1->argument, env));
 	if (!ft_strcmp("pwd", cmd))
@@ -89,11 +89,17 @@ void	execute_pipe(t_tools *tools, t_command *cmd, char ***env)
 		write(1, "error\n", 7);
 	if (tools->pid[tools->i] == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		close(tools->fd[0]);
 		dup2(tools->fd[1], 1);
 		close(tools->fd[1]);
 		if (cmd->redirect)
 			redirect_to(cmd, tools);
+		if (__get_var(GETEXIT, 0) == -1)
+		{
+			__get_var(SETEXIT, 1);
+			exit(1);
+		}
 		if (builtin(cmd, env))
 			exit(0);
 		else

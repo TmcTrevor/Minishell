@@ -1,6 +1,6 @@
 NAME = minishell
-LDFLAGS=-L/Users/mbifenzi/.brew/opt/readline/lib
-CPPFLAGS=-I/Users/mbifenzi/.brew/opt/readline/include
+LDFLAGS= -L/goinfre/mokhames/.brew/opt/readline/lib
+CPPFLAGS= -I/goinfre/mokhames/.brew/opt/readline/include
 SRCS =	srcs/cmd_utils.c \
 		srcs/execution/main_exec.c \
 		srcs/execution/main_exec_helper.c \
@@ -10,6 +10,7 @@ SRCS =	srcs/cmd_utils.c \
 		srcs/execution/export.c \
 		srcs/execution/export2.c \
 		srcs/execution/signals.c \
+		srcs/execution/exit.c \
 		srcs/execution/redirection.c \
 		srcs/minishell.c \
 		srcs/parse/parse.c \

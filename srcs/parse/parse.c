@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 08:05:59 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/25 03:55:24 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/28 17:24:18 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,15 @@ void	split_pipe(t_main *main)
 
 int	check_piperror(t_main *main, int i)
 {
+	int e;
+
+	e = i;
 	while (main->line[i + 1] == ' ')
+	{
+		if (main->line[i + 2] == '\0' && e == -1)
+			return (2);
 		i++;
+	}
 	if (main->line[i + 1] == '|')
 		return (0);
 	if (main->line[i + 1] == '\0')
@@ -83,6 +90,26 @@ int	numb_of_quotes(char *c)
 	return (1);
 }
 
+int	exist(t_main *main)
+{
+	t_command	*cmd;
+	t_redirect	*red;
+
+	cmd = main->cmd;
+	while (cmd)
+	{
+		red = cmd->redirect;
+		while (red)
+		{
+			if (red->type == 4)
+				return (1);
+			red = red->nextred;
+		}
+		cmd = cmd->nextcmd;
+	}
+	return (0);
+}
+
 int	parse(t_main *main)
 {
 	int	i;
@@ -90,15 +117,17 @@ int	parse(t_main *main)
 	i = 0;
 	if (!*main->line)
 		return (0);
-	if (!check_piperror(main, -1))
+	i = check_piperror(main, -1);
+	if (!i)
 	{
 		write(2, "syntax error\n", 14);
 		return (0);
 	}
+	if (i == 2)
+		return (0);
 	if (!parse_pipes(main))
 		return (0);
 	if (!parse_redirection(main->cmd, main->env))
 		return (0);
-	execute_here_doc(main);
 	return (1);
 }

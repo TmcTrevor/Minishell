@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:21:15 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/25 02:54:15 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/28 16:51:44 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ char	*dollar_check(char *s, char **env)
 		open = check_quotes1(s[i], open);
 		if (s[i] == '$' && open != 1)
 			res = dollar_cases(res, s, env, &i);
+		else if (s[i] == '\"' || s[i] == '\'')
+			i++;
 		else if (s[i])
 			res = dollar_prefix(s, &i, res, open);
 	}

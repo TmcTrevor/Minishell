@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 09:29:13 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/25 02:57:34 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/27 17:03:07 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	lunch_here_doc(t_main *main, char **tab, int j)
 {
 	int		i;
 	char	*c;
-
+	
 	i = 0;
 	while (i < j)
 	{
@@ -57,12 +57,12 @@ void	execute_here_doc(t_main *main)
 	t_redirect	*red;
 	char		**tab;
 	int			j;
-
+	
 	cmd1 = main->cmd;
 	j = 0;
 	tab = NULL;
-	while (cmd1)
-	{
+    while (cmd1)
+    {
 		red = cmd1->redirect;
 		while (red)
 		{
@@ -76,7 +76,7 @@ void	execute_here_doc(t_main *main)
 		cmd1 = cmd1->nextcmd;
 	}
 	if (j > 0)
-		lunch_here_doc(main, tab, j);
+		lunch_here_doc(main, tab,j);
 	ft_fress(tab, j);
 }
 
