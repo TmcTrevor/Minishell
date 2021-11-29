@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:26:17 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/28 21:26:02 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/28 22:29:32 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <limits.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "../GNL/get_next_line.h"
 
 /*typedef struct	s_env
 {

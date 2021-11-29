@@ -45,7 +45,6 @@ SRCS =	srcs/cmd_utils.c \
 		libft/ft_itoa.c \
 		libft/ft_isdigit.c \
 		libft/ft_strcmp.c \
-		GNL/get_next_line.c \
 
 
 OBJS 	= ${SRCS:.c=.o}

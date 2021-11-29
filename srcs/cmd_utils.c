@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:29:35 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/28 22:14:56 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/29 02:39:18 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	error(char *c)
 {
 	write(2, c, ft_strlen(c));
 	write(2, " command not found\n", 19);
-	__get_var(SETEXIT, 127);
 	exit(127);
 }
 
@@ -50,11 +49,11 @@ void	cmd_call(t_command *cmd, char **envm)
 {
 	char	*file_path;
 	
+	signal(SIGQUIT, SIG_DFL);
 	if (ft_strchr(cmd->argument[0], '/'))
 		file_path = ft_strdup(cmd->fcmd);
 	else
 		file_path = find_path(cmd->fcmd, "PATH", envm);
-	__get_var(SETEXIT,0);
-	if (execve(file_path, cmd->argument, envm) == -1)
-		return (error(cmd->argument[0]));
+	execve(file_path, cmd->argument, envm);
+	error(cmd->argument[0]);
 }

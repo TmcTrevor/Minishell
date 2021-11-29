@@ -6,43 +6,42 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 02:20:46 by mbifenzi          #+#    #+#             */
-/*   Updated: 2021/11/28 21:26:37 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/29 02:48:41 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	all_waits(t_main *main, t_tools *tools)
+void	all_waits()
 {
-	int	i;
-	int stat;
+	int status;
 
-	i = 0;
-	while (i <= main->count)
+	while (waitpid(-1, &status, 0) != -1);
+	if (WIFEXITED(status))
+		__get_var(SETEXIT, WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
 	{
-		waitpid(tools->pid[i], &stat, 0);
-		i++;
-	}
-	if (i > 1)
-	{
-		if (WIFEXITED(stat))
-			__get_var(SETEXIT, WEXITSTATUS(stat));
-		else if (WIFSIGNALED(stat))
-		{
-			__get_var(SETEXIT, WTERMSIG(stat) + 128);
-			if (WTERMSIG(stat) == SIGQUIT)
-				write(2, "QUIT\n", 6);
-		}
+		__get_var(SETEXIT, WTERMSIG(status) + 128);
+		if (WTERMSIG(status) == SIGQUIT)
+			write(2, "QUIT\n", 7);
 	}
 }
 
 void	execute_lcmd(t_tools *tools, t_command *cmd, char ***env)
 {
-	tools->pid[tools->i] = fork();
-	if (tools->pid[tools->i] == 0)
+	int pid;
+
+	pid = fork();
+	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		if (cmd->redirect)
 			redirect_to(cmd, tools);
+		if (__get_var(GETEXIT, 0) == -1)
+		{
+			__get_var(SETEXIT, 1);
+			exit(1);
+		}
 		if (builtin(cmd, env))
 		{
 			__get_var(SETEXIT, 0);

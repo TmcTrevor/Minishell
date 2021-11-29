@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 02:18:16 by mbifenzi          #+#    #+#             */
-/*   Updated: 2021/11/28 21:54:26 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/29 02:47:42 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,10 @@ void	execute_pipe(t_tools *tools, t_command *cmd, char ***env)
 			exit(1);
 		}
 		if (builtin(cmd, env))
-			exit(0);
+			exit(__get_var(GETEXIT, 0));
 		else
 			non_builtin(cmd, *env);
+		
 	}
 	else
 	{

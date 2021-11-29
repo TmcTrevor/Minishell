@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 03:57:11 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/28 21:32:33 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/29 02:59:47 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ int	__get_var(t_norm op, int value)
 void	handle_sigint(int sigint)
 {
 	(void)sigint;
+
 	if (__get_var(GETPID, 0) == 0)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		rl_replace_line(" ", 0);
 		rl_redisplay();
-		__get_var(SETEXIT, 130);
+		__get_var(SETEXIT, 1);
 	}
 }
 

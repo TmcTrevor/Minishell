@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 00:18:00 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/27 21:38:09 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/29 02:47:46 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int	redirect_to(t_command *cmd, t_tools *tools)
 		red = red->nextred;
 	}
 	dup_n_close(fdin, fdout);
-	return (0);
+	return (1);
 }
 //close FDs at the end ?? 

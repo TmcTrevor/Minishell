@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:57:58 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/28 17:30:51 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/29 02:54:26 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,20 @@ int	main(int ac, char **argv, char **envm)
 	set_main(main, envm);
 	while (1)
 	{
-		main->line = readline("mokhamaes > ");
-		if (main->line)
+		main->line = readline("mokhamaes >");
+		if (!main->line)
 		{
-			if (parse(main))
-				execute(main);
-			add_history(main->line);
-			free(main->line);
 			clear_all(main);
+			free(main->line);
+			main->line = NULL;
+			printf("exit\n");
+			exit(1);
 		}
+		if (parse(main))
+			execute(main);
+		add_history(main->line);
+		free(main->line);
+		clear_all(main);
 	}
-	system("leaks minishell");
 	return (0);
 }

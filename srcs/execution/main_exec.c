@@ -6,7 +6,7 @@
 /*   By: mokhames <mokhames@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:39:02 by mokhames          #+#    #+#             */
-/*   Updated: 2021/11/28 21:30:08 by mokhames         ###   ########.fr       */
+/*   Updated: 2021/11/29 02:39:44 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_option(char **args)
 {
-	if (!ft_strncmp(args[1], "-n", 2))
+	if (!ft_strcmp(args[1], "-n"))
 		return (2);
 	return (1);
 }
@@ -94,7 +94,6 @@ int	execute(t_main *main)
 		cmd1 = cmd1->nextcmd;
 	}
 	execute_lcmd(tools, cmd1, &main->env);
-	tools->i++;
 	all_waits(main, tools);
 	return (execute_helper(in, out, tools));
 }
